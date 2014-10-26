@@ -1,0 +1,388 @@
+/*
+ * Library to access the Windows Minidump (MDMP) file format
+ *
+ * Copyright (C) 2014, Joachim Metz <joachim.metz@gmail.com>
+ *
+ * Refer to AUTHORS for acknowledgements.
+ *
+ * This software is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this software.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#if !defined( _LIBMDMP_H )
+#define _LIBMDMP_H
+
+#include <libmdmp/codepage.h>
+#include <libmdmp/definitions.h>
+#include <libmdmp/error.h>
+#include <libmdmp/extern.h>
+#include <libmdmp/features.h>
+#include <libmdmp/types.h>
+
+#include <stdio.h>
+
+#if defined( LIBMDMP_HAVE_BFIO )
+#include <libbfio.h>
+#endif
+
+#if defined( __cplusplus )
+extern "C" {
+#endif
+
+/* -------------------------------------------------------------------------
+ * Support functions
+ * ------------------------------------------------------------------------- */
+
+/* Returns the library version
+ */
+LIBMDMP_EXTERN \
+const char *libmdmp_get_version(
+             void );
+
+/* Returns the access flags for reading
+ */
+LIBMDMP_EXTERN \
+int libmdmp_get_access_flags_read(
+     void );
+
+/* Retrieves the narrow system string codepage
+ * A value of 0 represents no codepage, UTF-8 encoding is used instead
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_get_codepage(
+     int *codepage,
+     libmdmp_error_t **error );
+
+/* Sets the narrow system string codepage
+ * A value of 0 represents no codepage, UTF-8 encoding is used instead
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_set_codepage(
+     int codepage,
+     libmdmp_error_t **error );
+
+/* Determines if a file is a Nickfile (check for the MDMP file signature)
+ * Returns 1 if true, 0 if not or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_check_file_signature(
+     const char *filename,
+     libmdmp_error_t **error );
+
+#if defined( LIBMDMP_HAVE_WIDE_CHARACTER_TYPE )
+/* Determines if a file is a Nickfile (check for the MDMP file signature)
+ * Returns 1 if true, 0 if not or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_check_file_signature_wide(
+     const wchar_t *filename,
+     libmdmp_error_t **error );
+#endif
+
+#if defined( LIBMDMP_HAVE_BFIO )
+/* Determines if a file is a Nickfile (check for the MDMP file signature) using a Basic File IO (bfio) handle
+ * Returns 1 if true, 0 if not or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_check_file_signature_file_io_handle(
+     libbfio_handle_t *file_io_handle,
+     libmdmp_error_t **error );
+#endif
+
+/* -------------------------------------------------------------------------
+ * Notify functions
+ * ------------------------------------------------------------------------- */
+
+/* Sets the verbose notification
+ */
+LIBMDMP_EXTERN \
+void libmdmp_notify_set_verbose(
+      int verbose );
+
+/* Sets the notification stream
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_notify_set_stream(
+     FILE *stream,
+     libmdmp_error_t **error );
+
+/* Opens the notification stream using a filename
+ * The stream is opened in append mode
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_notify_stream_open(
+     const char *filename,
+     libmdmp_error_t **error );
+
+/* Closes the notification stream if opened using a filename
+ * Returns 0 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_notify_stream_close(
+     libmdmp_error_t **error );
+
+/* -------------------------------------------------------------------------
+ * Error functions
+ * ------------------------------------------------------------------------- */
+
+/* Frees an error
+ */
+LIBMDMP_EXTERN \
+void libmdmp_error_free(
+      libmdmp_error_t **error );
+
+/* Prints a descriptive string of the error to the stream
+ * Returns the number of printed characters if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_error_fprint(
+     libmdmp_error_t *error,
+     FILE *stream );
+
+/* Prints a descriptive string of the error to the string
+ * The end-of-string character is not included in the return value
+ * Returns the number of printed characters if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_error_sprint(
+     libmdmp_error_t *error,
+     char *string,
+     size_t size );
+
+/* Prints a backtrace of the error to the stream
+ * Returns the number of printed characters if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_error_backtrace_fprint(
+     libmdmp_error_t *error,
+     FILE *stream );
+
+/* Prints a backtrace of the error to the string
+ * The end-of-string character is not included in the return value
+ * Returns the number of printed characters if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_error_backtrace_sprint(
+     libmdmp_error_t *error,
+     char *string,
+     size_t size );
+
+/* -------------------------------------------------------------------------
+ * File functions
+ * ------------------------------------------------------------------------- */
+
+/* Creates a file
+ * Make sure the value file is referencing, is set to NULL
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_initialize(
+     libmdmp_file_t **file,
+     libmdmp_error_t **error );
+
+/* Frees a file
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_free(
+     libmdmp_file_t **file,
+     libmdmp_error_t **error );
+
+/* Signals the libmdmp file to abort its current activity
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_signal_abort(
+     libmdmp_file_t *file,
+     libmdmp_error_t **error );
+
+/* Opens a file
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_open(
+     libmdmp_file_t *file,
+     const char *filename,
+     int access_flags,
+     libmdmp_error_t **error );
+
+#if defined( LIBMDMP_HAVE_WIDE_CHARACTER_TYPE )
+/* Opens a file
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_open_wide(
+     libmdmp_file_t *file,
+     const wchar_t *filename,
+     int access_flags,
+     libmdmp_error_t **error );
+#endif
+
+#if defined( LIBMDMP_HAVE_BFIO )
+/* Opens a file using a Basic File IO (bfio) handle
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_open_file_io_handle(
+     libmdmp_file_t *file,
+     libbfio_handle_t *file_io_handle,
+     int access_flags,
+     libmdmp_error_t **error );
+#endif
+
+/* Closes a file
+ * Returns 0 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_close(
+     libmdmp_file_t *file,
+     libmdmp_error_t **error );
+
+/* Retrieves the number of streams
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_get_number_of_streams(
+     libmdmp_file_t *file,
+     int *number_of_streams,
+     libmdmp_error_t **error );
+
+/* Retrieves a specific stream
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_get_stream(
+     libmdmp_file_t *file,
+     int stream_index,
+     libmdmp_stream_t **stream,
+     libmdmp_error_t **error );
+
+/* Retrieves a specific stream by type
+ * Returns 1 if successful, 0 if no such stream or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_file_get_stream_by_type(
+     libmdmp_file_t *file,
+     uint32_t stream_type,
+     libmdmp_stream_t **stream,
+     libmdmp_error_t **error );
+
+/* -------------------------------------------------------------------------
+ * Stream functions
+ * ------------------------------------------------------------------------- */
+
+/* Frees a stream
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_stream_free(
+     libmdmp_stream_t **stream,
+     libmdmp_error_t **error );
+
+/* Retrieves the type
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_stream_get_type(
+     libmdmp_stream_t *stream,
+     uint32_t *type,
+     libmdmp_error_t **error );
+
+/* Reads data at the current offset into a buffer
+ * Returns the number of bytes read or -1 on error
+ */
+LIBMDMP_EXTERN \
+ssize_t libmdmp_stream_read_buffer(
+         libmdmp_stream_t *stream,
+         void *buffer,
+         size_t buffer_size,
+         libmdmp_error_t **error );
+
+/* Reads data at a specific offset into a buffer
+ * Returns the number of bytes read or -1 on error
+ */
+LIBMDMP_EXTERN \
+ssize_t libmdmp_stream_read_buffer_at_offset(
+         libmdmp_stream_t *stream,
+         void *buffer,
+         size_t buffer_size,
+         off64_t offset,
+         libmdmp_error_t **error );
+
+/* Seeks a certain offset of the data
+ * Returns the offset if seek is successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+off64_t libmdmp_stream_seek_offset(
+         libmdmp_stream_t *stream,
+         off64_t offset,
+         int whence,
+         libmdmp_error_t **error );
+
+/* Retrieves the (current) offset
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_stream_get_offset(
+     libmdmp_stream_t *stream,
+     off64_t *offset,
+     libmdmp_error_t **error );
+
+/* Retrieves the size
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_stream_get_size(
+     libmdmp_stream_t *stream,
+     size64_t *size,
+     libmdmp_error_t **error );
+
+/* Retrieves the start offset
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_stream_get_start_offset(
+     libmdmp_stream_t *stream,
+     off64_t *start_offset,
+     libmdmp_error_t **error );
+
+/* Retrieves the virtual address
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_stream_get_virtual_address(
+     libmdmp_stream_t *stream,
+     uint32_t *virtual_address,
+     libmdmp_error_t **error );
+
+#if defined( LIBMDMP_HAVE_BFIO )
+/* Retrieves the stream data file io handle
+ * Returns 1 if successful or -1 on error
+ */
+LIBMDMP_EXTERN \
+int libmdmp_stream_get_data_file_io_handle(
+     libmdmp_stream_t *stream,
+     libbfio_handle_t **file_io_handle,
+     libmdmp_error_t **error );
+#endif
+
+#if defined( __cplusplus )
+}
+#endif
+
+#endif
+

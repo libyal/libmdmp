@@ -1,0 +1,12 @@
+libmdmp is a library to access the Windows Minidump (MDPM) format.
+
+Note that this project currently only focuses on the analysis of the format.
+
+Project information:
+* Status: experimental
+* Licence: LGPLv3+
+
+For more information see:
+* Project documentation: https://github.com/libyal/libmdmp/wiki/Home
+* How to build from source: https://github.com/libyal/libmdmp/wiki/Building
+

@@ -1,0 +1,23 @@
+TODO:
+* mdmpinfo
+  - print file flags
+  - print general system information
+  - print module information
+* export the memory allocation information stream?
+* add python bindings
+* add dpkg files
+* update manuals
+
+20141026
+* changes for deployment
+* removed README.macosx
+
+20140726
+* updated dependencies
+
+20140407
+* worked on format
+
+20140402
+* Initial version based on libpf
+
