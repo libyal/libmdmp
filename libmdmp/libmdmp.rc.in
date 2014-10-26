@@ -28,7 +28,7 @@ BEGIN
       VALUE "OriginalFilename",		"libmdmp.dll\0"
       VALUE "ProductName",		"libmdmp\0"
       VALUE "ProductVersion",		"@VERSION@" "\0"
-      VALUE "Comments",			"For more information visit http://code.google.com/p/libmdmp/\0"
+      VALUE "Comments",			"For more information visit https://github.com/libyal/libmdmp/\0"
     END
   END
   BLOCK "VarFileInfo"
