@@ -24,13 +24,8 @@
 #include <memory.h>
 #include <types.h>
 
-#if defined( HAVE_LOCAL_LIBBFIO )
-#include <libbfio_definitions.h>
-#elif defined( HAVE_LIBBFIO_H )
-#include <libbfio.h>
-#endif
-
 #include "mdmpoutput.h"
+#include "mdmptools_libbfio.h"
 #include "mdmptools_libmdmp.h"
 #include "mdmptools_libuna.h"
 

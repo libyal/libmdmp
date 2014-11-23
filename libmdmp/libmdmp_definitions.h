@@ -37,11 +37,11 @@
  * for local use of libmdmp
  */
 #else
-#define LIBMDMP_VERSION					20141026
+#define LIBMDMP_VERSION					20141123
 
 /* The version string
  */
-#define LIBMDMP_VERSION_STRING				"20141026"
+#define LIBMDMP_VERSION_STRING				"20141123"
 
 /* The access flags definitions
  * bit 1        set to 1 for read access

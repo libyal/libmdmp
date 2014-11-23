@@ -25,6 +25,7 @@ mdmpinfo_SOURCES = \
 	mdmpinfo.c \
 	mdmpinput.c mdmpinput.h \
 	mdmpoutput.c mdmpoutput.h \
+	mdmptools_libbfio.h \
 	mdmptools_libcerror.h \
 	mdmptools_libclocale.h \
 	mdmptools_libcnotify.h \
