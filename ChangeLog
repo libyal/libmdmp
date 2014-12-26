@@ -5,11 +5,11 @@ TODO:
   - print module information
 * export the memory allocation information stream?
 * add python bindings
-* add dpkg files
 * update manuals
 
 20141226
 * code clean up
+* added dpkg files
 
 20141201
 * code clean up

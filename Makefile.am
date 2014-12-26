@@ -25,6 +25,18 @@ SUBDIRS = \
 	tests \
 	msvscpp
 
+DPKG_FILES = \
+	dpkg/changelog \
+	dpkg/changelog.in \
+       	dpkg/compat \
+       	dpkg/control \
+       	dpkg/copyright \
+       	dpkg/copyright.in \
+       	dpkg/rules \
+       	dpkg/libagdb-dev.docs \
+       	dpkg/libagdb.docs \
+       	dpkg/libagdb-tools.docs
+
 GETTEXT_FILES = \
 	config.rpath \
 	po/Makevars.in
@@ -37,6 +49,7 @@ SPEC_FILES = \
 	libmdmp.spec.in
 
 EXTRA_DIST = \
+	$(DPKG_FILES) \
 	$(GETTEXT_FILES) \
         $(PKGCONFIG_FILES) \
         $(SPEC_FILES)
