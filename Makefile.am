@@ -37,7 +37,6 @@ SPEC_FILES = \
 	libmdmp.spec.in
 
 EXTRA_DIST = \
-	README.macosx \
 	$(GETTEXT_FILES) \
         $(PKGCONFIG_FILES) \
         $(SPEC_FILES)
