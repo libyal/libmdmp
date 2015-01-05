@@ -1,4 +1,4 @@
-libmdmp is a library to access the Windows Minidump (MDPM) format.
+libmdmp is a library to access the Windows Minidump (MDMP) format.
 
 Note that this project currently only focuses on the analysis of the format.
 

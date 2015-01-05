@@ -1,13 +1,12 @@
 Source: libmdmp
-Section: unknown
+Section: libs
 Priority: extra
 Maintainer: Joachim Metz <joachim.metz@gmail.com>
 Build-Depends: debhelper (>= 7), autotools-dev
-Standards-Version: 3.8.3
+Standards-Version: 3.9.5
 Homepage: https://github.com/libyal/libmdmp/
 
 Package: libmdmp
-Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: libmdmp-dbg
@@ -17,21 +16,21 @@ Description: Library to access the Windows Minidump (MDMP) file format
 Package: libmdmp-dbg
 Architecture: any
 Section: debug
-Depends: libmdmp (= ${Source-Version}), ${misc:Depends}
+Depends: libmdmp (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for libmdmp
  Debugging symbols for libmdmp.
 
 Package: libmdmp-dev
 Section: libdevel
 Architecture: any
-Depends: libmdmp (= ${Source-Version})
+Depends: libmdmp (= ${binary:Version}), ${misc:Depends}
 Description: Header files and libraries for developing applications for libmdmp
  Header files and libraries for developing applications for libmdmp.
 
 Package: libmdmp-tools
 Section: utils
 Architecture: any
-Depends: libmdmp (= ${Source-Version}), ${shlibs:Depends}
+Depends: libmdmp (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Several tools for reading Windows Minidump (MDMP) files
  Several tools for reading Windows Minidump (MDMP) files.
 
