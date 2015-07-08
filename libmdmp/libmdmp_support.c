@@ -355,7 +355,7 @@ int libmdmp_check_file_signature_file_io_handle(
 		 "%s: unable to open file.",
 		 function );
 
-		return( -1 );
+		goto on_error;
 	}
 	else if( file_io_handle_is_open == 0 )
 	{
@@ -371,8 +371,23 @@ int libmdmp_check_file_signature_file_io_handle(
 			 "%s: unable to open file.",
 			 function );
 
-			return( -1 );
+			goto on_error;
 		}
+	}
+	if( libbfio_handle_seek_offset(
+	     file_io_handle,
+	     0,
+	     SEEK_SET,
+	     error ) == -1 )
+	{
+		libcerror_error_set(
+		 error,
+		 LIBCERROR_ERROR_DOMAIN_IO,
+		 LIBCERROR_IO_ERROR_SEEK_FAILED,
+		 "%s: unable to seek file header offset: 0.",
+		 function );
+
+		goto on_error;
 	}
 	read_count = libbfio_handle_read_buffer(
 	              file_io_handle,
@@ -380,7 +395,7 @@ int libmdmp_check_file_signature_file_io_handle(
 	              4,
 	              error );
 
-	if( read_count != 2 )
+	if( read_count != 4 )
 	{
 		libcerror_error_set(
 		 error,
@@ -389,11 +404,7 @@ int libmdmp_check_file_signature_file_io_handle(
 		 "%s: unable to read signature.",
 		 function );
 
-		libbfio_handle_close(
-		 file_io_handle,
-		 NULL );
-
-		return( -1 );
+		goto on_error;
 	}
 	if( file_io_handle_is_open == 0 )
 	{
@@ -408,7 +419,7 @@ int libmdmp_check_file_signature_file_io_handle(
 			 "%s: unable to close file.",
 			 function );
 
-			return( -1 );
+			goto on_error;
 		}
 	}
 	if( memory_compare(
@@ -419,5 +430,14 @@ int libmdmp_check_file_signature_file_io_handle(
 		return( 1 );
 	}
 	return( 0 );
+
+on_error:
+	if( file_io_handle_is_open == 0 )
+	{
+		libbfio_handle_close(
+		 file_io_handle,
+		 error );
+	}
+	return( -1 );
 }
 
