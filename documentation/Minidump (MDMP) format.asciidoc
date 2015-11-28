@@ -163,23 +163,228 @@ See section: <<stream_type,Stream type>>
 See section: <<location_descriptor,Location descriptor>>
 |===
 
-[yellow-background]*TODO: migrate remaining documentation*
-
 === [[stream_type]]Stream type
+The stream type (MINIDUMP_STREAM_TYPE) is defined as:
 
-[yellow-background]*TODO: migrate remaining documentation*
+[cols="1,1,5",options="header"]
+|===
+| Value | Identifier | Description
+| 0 | UnusedStream | Reserved +
+According to MSDN this should not be used.
+| 1 | ReservedStream0 | Reserved +
+According to MSDN this should not be used.
+| 2 | ReservedStream1 | Reserved +
+According to MSDN this should not be used.
+| 3 | ThreadListStream | The thread information stream +
+See section: <<thread_information_stream,Thread information stream>>
+| 4 | ModuleListStream | The module information stream +
+See section: <<module_information_stream,Module information stream>>
+| 5 | MemoryListStream | The memory allocation information stream +
+See section: <<memory_allocation_information_stream_32bit,32-bit memory allocation information stream>>
+| 6 | ExceptionStream | The exception information stream +
+See section: <<exception_information_stream,Exception information stream>>
+| 7 | SystemInfoStream | The general system information stream +
+See section: <<general_system_information_stream,General system information stream>>
+| 8 | ThreadExListStream | The extended thread information stream +
+See section: <<extended_thread_information_stream,Extended thread information stream>>
+| 9 | Memory64ListStream | The 64-bit memory allocation information stream +
+See section: <<memory_allocation_information_stream_64bit,64-bit memory allocation information stream>>
+| 10 | CommentStreamA | The ASCII comment stream +
+This stream is used for documentation purposes
+| 11 | CommentStreamW | The Unicode comment stream +
+This stream is used for documentation purposes
+| 12 | HandleDataStream | The active operating system handles stream +
+See section: <<active_operating_system_handles_stream,Active operating system handles stream>>
+| 13 | FunctionTableStream | The function table information stream +
+See section: <<function_table_information_stream,Function table information stream>>
+3+| _Introduced after DbgHelp 5.1_
+| 14 | UnloadedModuleListStream | The unloaded module information stream +
+See section: <<unloaded_module_information_stream,Unloaded module information stream>>
+| 15 | MiscInfoStream | The miscellaneous information stream +
+See section: <<miscellaneous_information_stream,Miscellaneous information stream>>
+3+| _Introduced after DbgHelp 6.1_
+| 16 | MemoryInfoListStream | The memory region description information stream +
+It corresponds to the information that would be returned for the process from the VirtualQuery function +
+See section: <<memory_region_description_information_stream,Memory region description information stream>>
+| 17 | ThreadInfoListStream | The thread state information stream +
+See section: <<thread_state_information_stream,Thread state information stream>>
+3+| _Introduced after DbgHelp 6.4_
+| 18 | HandleOperationListStream | The operation list information stream +
+See section: <<operation_list_information_stream,Operation list information stream>>
+| 19 | TokenStream | [yellow-background]*Unknown seen in Windows 7*
+3+| _Common_
+| 0xffff | LastReservedStream | [yellow-background]*Any value greater than this value will not be used by the system and can be used to represent application-defined data streams.* +
+[yellow-background]*For more information, see MINIDUMP_USER_STREAM*
+|===
 
 == Common types
-
-[yellow-background]*TODO: migrate remaining documentation*
+[yellow-background]*TODO: add missing text*
 
 === [[location_descriptor]]Location descriptor
+[yellow-background]*This structure uses 32-bit locations for RVAs in the first 
+4GB and 64-bit locations are used for larger RVAs.*
 
-[yellow-background]*TODO: migrate remaining documentation*
+==== 32-bit location descriptor
+The 32-bit location descriptor (MINIDUMP_LOCATION_DESCRIPTOR) is 8 bytes of 
+size and consist of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Data size
+| 4 | 4 | | RVA +
+Contains an offset relative to the start of the file
+|===
+
+==== 64-bit location descriptor
+The 64-bit location descriptor (MINIDUMP_LOCATION_DESCRIPTOR64) is 16 bytes of 
+size and consist of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | Data size
+| 8 | 8 | | RVA +
+Contains an offset relative to the start of the file
+|===
+
+=== String
+[yellow-background]*TODO: add text (MINIDUMP_STRING)*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | [yellow-background]*Length (number of characters or bytes)*
+| 4 | ...  | | String data +
+Contain an [yellow-background]*UTF-16 little-endian string (with or without an end-of-string character)*
+|===
 
 == Streams
+[yellow-background]*TODO: add missing text*
+
+=== [[active_operating_system_handles_stream]]Active operating system handles stream
 
 [yellow-background]*TODO: migrate remaining documentation*
+
+=== [[exception_information_stream]]Exception information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[extended_thread_information_stream]]Extended thread information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[function_table_information_stream]]Function table information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[general_system_information_stream]]General system information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[memory_allocation_information_stream_32bit]]32-bit memory allocation information stream
+The 32-bit memory allocation information stream (MINIDUMP_MEMORY_LIST) is 
+variable of size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Number of memory ranges
+| 4 | ... | | Array of memory range descriptors
+|===
+
+=== 32-bit memory range descriptor
+The 32-bit memory range descriptor (MINIDUMP_MEMORY_DESCRIPTOR) is [yellow-background]*TODO: add text*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | [yellow-background]*Unknown (Start of memory range?)* +
+[yellow-background]*Does this value contain a file offset or memory address?*
+| 8 | ... | | [yellow-background]*Unknown (Memory location descriptor)* +
+See section: <<location_descriptor,Location descriptor>>
+|===
+
+=== [[memory_allocation_information_stream_64bit]]64-bit memory allocation information stream
+The 64-bit memory allocation information stream (MINIDUMP_MEMORY64_LIST) is 
+variable of size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | Number of memory ranges
+| 8 | 8 | | Base RVA +
+Contains an offset relative to the start of the file
+| 16 | ...  | | Array of memory ranges
+|===
+
+=== 64-bit memory range descriptor
+The 64-bit memory range descriptro (MINIDUMP_MEMORY_DESCRIPTOR64) is 16 bytes 
+of size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | [yellow-background]*Unknown (Start of memory range?)* +
+[yellow-background]*Does this value contain a file offset or memory address?*
+| 8 | 16 | | Data size
+|===
+
+=== [[memory_region_description_information_stream]]Memory region description information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[miscellaneous_information_stream]]Miscellaneous information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[module_information_stream]]Module information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[operation_list_information_stream]]Operation list information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[thread_information_stream]]Thread information stream
+The thread information stream (MINIDUMP_THREAD_LIST) is variable of size and 
+consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Number of threads
+| 4 | ...  | | Array of thread information entries
+|===
+
+=== Thread information entry
+The thread information entry (MINIDUMP_THREAD) is [yellow-background]*TODO: add text*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Thread identifier
+| 4 | 4 | | Suspend count
+| 8 | 4 | | Priority class
+| 12 | 4 | | Priority
+| 16 | 8 | | Thread Environment Block (TEB)
+| 24 | ...  | | Stack memory descriptor +
+See section: [yellow-background]*TODO: add text*
+| ... | ... | | Thread context location descriptor +
+See section: <<locaton_descriptor,Location descriptor>>
+|===
+
+=== [[thread_state_information_stream]]Thread state information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[unloaded_module_information_stream]]Unloaded module information stream
+
+[yellow-background]*TODO: migrate remaining documentation*
+
+=== [[user_defined_stream]]User defined stream
+
+[yellow-background]*TODO: add text (MINIDUMP_USER_STREAM)*
 
 == Notes
 ....
@@ -190,14 +395,30 @@ dumpchk -v file.mdmp
 [appendix]
 == References
 
-`[REFERENCE]`
+`[LIBEXE]`
 
 [cols="1,5",options="header"]
 |===
-| Title: | 
-| Author(s): | 
-| Date: | 
-| URL: | 
+| Title: | MZ, PE-COFF executable file format (EXE)
+| Author(s): | Joachim Metz
+| Date: | October 2011 
+| URL: | [yellow-background]*TODO: add URL*
+|===
+
+`[MSDN]`
+
+[cols="1,5",options="header"]
+|===
+| Title: | MINIDUMP_HEADER structure
+| URL: | http://msdn.microsoft.com/en-us/library/windows/desktop/ms680378(v=vs.85).aspx
+|===
+
+`[REACTOS]`
+
+[cols="1,5",options="header"]
+|===
+| Title: | compat.h
+| URL: | http://doxygen.reactos.org/d5/db1/dll_2win32_2dbghelp_2compat_8h_source.html
 |===
 
 [appendix]
