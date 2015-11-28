@@ -255,7 +255,7 @@ Contains an offset relative to the start of the file
 |===
 | Offset | Size | Value | Description
 | 0 | 4 | | [yellow-background]*Length (number of characters or bytes)*
-| 4 | ...  | | String data +
+| 4 | ... | | String data +
 Contain an [yellow-background]*UTF-16 little-endian string (with or without an end-of-string character)*
 |===
 
@@ -263,20 +263,202 @@ Contain an [yellow-background]*UTF-16 little-endian string (with or without an e
 [yellow-background]*TODO: add missing text*
 
 === [[active_operating_system_handles_stream]]Active operating system handles stream
+The active operating system handles information stream consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+* operating system handles information header
+* array of operating system handle descriptors
+
+The operating system handles header (MINIDUMP_HANDLE_DATA_STREAM) is 16 bytes 
+of size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | 16 | Header size +
+Includes the header size value itself
+| 4 | 4 | 32 or 40 | Descriptor size
+| 8 | 4 | | Number of descriptors
+| 12 | 4 | 0 | [yellow-background]*Unknown (Reserved)*
+|===
+
+The operating system handle descriptor - version 1 (MINIDUMP_HANDLE_DESCRIPTOR) 
+or operating system handle descriptor - version 2 
+(MINIDUMP_HANDLE_DESCRIPTOR_2) are respectively 32 or 40 bytes of size and 
+consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | [yellow-background]*Unknown (Handle?)*
+| 8 | 4 | | Type name RVA +
+Contains an offset relative to the start of the file
+| 12 | 4 | | Handle object name RVA +
+Contains an offset relative to the start of the file
+| 16 | 4 | | Attributes
+| 20 | 4 | | [yellow-background]*Unknown (Granted access?)*
+| 24 | 4 | | Handle count
+| 28 | 4 | | Pointer count
+4+| [yellow-background]*If handle descriptor size > 32?*
+| 32 | 4 | | Handle object information RVA +
+Contains an offset relative to the start of the file
+| See section: [yellow-background]*TODO*
+| 36 | 4 | 0 | [yellow-background]*Unknown (Reserved)*
+|===
+
+[yellow-background]*TODO: add text*
+
+Object information RVA point to: MINIDUMP_HANDLE_OBJECT_INFORMATION
+[yellow-background]*TODO add cross reference*
+
+==== Handle object information
+The handle object information (MINIDUMP_HANDLE_OBJECT_INFORMATION) is [yellow-background]*TODO*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Next handle object information RVA +
+Contains an offset relative to the start of the file
+| 4 | 4 | | Handle object information type
+| 8 | 4 | | Handle object information data size
+|===
+
+[yellow-background]*TODO followed by data?*
+
+==== Handle object information type
+The handle object information type (MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE) is 
+defined as:
+
+[cols="1,1,5",options="header"]
+|===
+| Value | Identifier | Description
+| 0 | MiniHandleObjectInformationNone | There is no object-specific information for this handle type.
+| 1 | MiniThreadInformation1 | The information is specific to thread objects.
+| 2 | MiniMutantInformation1 | The information is specific to mutant objects.
+| 3 | MiniMutantInformation2 | The information is specific to mutant objects.
+| 4 | MiniProcessInformation1 | The information is specific to process objects.
+| 5 | MiniProcessInformation2 | The information is specific to process objects.
+|===
 
 === [[exception_information_stream]]Exception information stream
+The exception information stream (MINIDUMP_EXCEPTION_STREAM) is variable of 
+size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Thread identifier
+| 4 | 4 | | [yellow-background]*Unknown (Alignment padding)*
+| 8 | ... | | Exception record +
+See action: [yellow-background]*TODO: add cross reference*
+| ... | ... | | Thread context location descriptor +
+See section: <<location_descriptor,Location descriptor>>
+|===
+
+The exception record (MINIDUMP_EXCEPTION) is variable of size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Exception code
+| 4 | 4 | | Exception flags
+| 8 | 8 | | Exception record
+| 16 | 8 | | Exception address
+| 24 | 4 | | Number of exception information entries (or parameters) +
+The maximum number of entries is 15 (EXCEPTION_MAXIMUM_PARAMETERS)
+| 28 | 4 | | Alignment padding +
+Reserved for cross-platform structure member alignment
+| 32 | 8 x ... | | Array of exception information entries +
+Where an exception information entry is an 64-bit integer
+|===
+
+[yellow-background]*TODO: add text*
+....
+EXCEPTION_RECORD:  00135da4 -- (.exr 0x135da4)
+ExceptionAddress: 001363c0 (0x001363c0)
+  ExceptionCode: c0000005 (Access violation)
+ ExceptionFlags: 00000000
+NumberParameters: 2
+  Parameter[0]: 00000008
+  Parameter[1]: 001363c0
+Attempt to execute non-executable address 001363c0
+....
+
+==== Exception codes
 
 [yellow-background]*TODO: migrate remaining documentation*
+
+==== Exception flags
+
+[cols="1,1,5",options="header"]
+|===
+| Value | Identifier | Description
+| 0 | EXCEPTION_CONTINUABLE | A continuable exception
+| 1 | EXCEPTION_NONCONTINUABLE (EH_NONCONTINUABLE) | A non-continuable exception
+|===
 
 === [[extended_thread_information_stream]]Extended thread information stream
+The extended thread information stream (MINIDUMP_THREAD_EX_LIST) is variable of 
+size and consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Number of threads
+| 4 | ... | | Array of thread information entries
+|===
+
+The extended thread information entry (MINIDUMP_THREAD_EX) is [yellow-background]*TODO*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Thread identifier
+| 4 | 4 | | Suspend count
+| 8 | 4 | | Priority class
+| 12 | 4 | | Priority
+| 16 | 8 | | Thread Environment Block (TEB)
+| 24 | ... | | Stack memory descriptor +
+See section: [yellow-background]*TODO add cross reference*
+| ... | ... | | Thread context location descriptor +
+See section: <<location_descriptor,Location descriptor>>
+| ... | ... | | Backing store memory descriptor +
+See section: [yellow-background]*TODO add cross reference*
+|===
 
 === [[function_table_information_stream]]Function table information stream
+The function table information stream consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+* function table information header
+* array of function table information descriptors
+
+The function table information header (MINIDUMP_FUNCTION_TABLE_STREAM) is 24 
+bytes of size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | 24 | Header size +
+Includes the header size value itself
+| 4 | 4 | | Descriptor size
+| 8 | 4 | | Native descriptor size
+| 12 | 4 | | Function entry size
+| 16 | 4 | | Number of function table descriptors
+| 20 | 4 | | Alignment padding size
+|===
+
+==== Function table infomration descriptor
+The function table information descriptor (MINIDUMP_FUNCTION_TABLE_DESCRIPTOR) 
+is [yellow-background]*TODO*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | [yellow-background]*Unknown (Minimum address)*
+| 8 | 8 | | [yellow-background]*Unknown (Maximum address)*
+| 16 | 8 | | [yellow-background]*Unknown (Base address)*
+| 24 | 4 | | [yellow-background]*Unknown (Entry count)*
+| 28 | 4 | | [yellow-background]*Unknown (Alignment padding size)*
+|===
 
 === [[general_system_information_stream]]General system information stream
 
@@ -315,7 +497,7 @@ variable of size and consists of:
 | 0 | 8 | | Number of memory ranges
 | 8 | 8 | | Base RVA +
 Contains an offset relative to the start of the file
-| 16 | ...  | | Array of memory ranges
+| 16 | ... | | Array of memory ranges
 |===
 
 === 64-bit memory range descriptor
@@ -331,20 +513,165 @@ of size and consists of:
 |===
 
 === [[memory_region_description_information_stream]]Memory region description information stream
+The memory region description information stream consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+* memory information header
+* array of memory information entries
+
+The memory information header (MINIDUMP_MEMORY_INFO_LIST) is 16 bytes of size 
+and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | 16 | Header size +
+Includes the header size value itself
+| 4 | 4 | 48 | Entry size
+| 8 | 8 | | Number of entries
+|===
+
+The memory information entry (MINIDUMP_MEMORY_INFO) is 48 bytes of size and 
+consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | [yellow-background]*Unknown (Base address)*
+| 8 | 8 | | [yellow-background]*Unknown (Allocation base)*
+| 16 | 4 | | [yellow-background]*Unknown (Allocation protect)*
+| 20 | 4 | | [yellow-background]*Unknown (Alignment padding)*
+| 24 | 8 | | [yellow-background]*Unknown (Region size)*
+| 32 | 4 | | [yellow-background]*Unknown (State)*
+| 36 | 4 | | [yellow-background]*Unknown (Protect)*
+| 40 | 4 | | [yellow-background]*Unknown (Type)*
+| 44 | 4 | | [yellow-background]*Unknown (Alignment padding)*
+|===
 
 === [[miscellaneous_information_stream]]Miscellaneous information stream
+The miscellaneous information stream - version 1 (MINIDUMP_MISC_INFO) or the 
+miscellaneous information stream - version 2 (MINIDUMP_MISC_INFO_2) are 
+respectively 24 or 44 bytes of size and consist of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Stream data size
+| 4 | 4 | | Miscellaneous information flags +
+See section: [yellow-background]*TODO add cross reference*
+| 8 | 4 | | Process identifier (PID)
+| 12 | 4 | | Process creation time +
+Contains a POSIX timestamp
+| 16 | 4 | | Process user time +
+Contains a POSIX timestamp
+| 20 | 4 | | Process kernel time +
+Contains a POSIX timestamp
+4+| [yellow-background]*If stream data size > 24?*
+| 24 | 4 | | Processor maximum MHz
+| 28 | 4 | | Processor current MHz
+| 32 | 4 | | Processor MHz limit
+| 36 | 4 | | Processor maximum idle state
+| 40 | 4 | | Processor current idle state
+|===
+
+[yellow-background]*TODO what about additional data?*
+
+....
+00000100  e8 00 00 00 d7 00 00 00  b8 18 00 00 44 76 6d 50  |............DvmP| 
+00000110  78 04 00 00 6e 04 00 00  c5 09 00 00 c5 09 00 00  |x...n...........| 
+00000120  c5 09 00 00 03 00 00 00  01 00 00 00              |............. ..| 
+
+00000120                                       10 20 00 00  |............. ..| 
+00000130  0d 00 00 d0 00 00 00 00  01 00 00 00 b4 00 00 00  |................| 
+00000140  45 00 2e 00 20 00 53 00  6f 00 75 00 74 00 68 00  |E... .S.o.u.t.h.| 
+00000150  20 00 41 00 6d 00 65 00  72 00 69 00 63 00 61 00  | .A.m.e.r.i.c.a.| 
+00000160  20 00 53 00 74 00 61 00  6e 00 64 00 61 00 72 00  | .S.t.a.n.d.a.r.| 
+00000170  64 00 20 00 54 00 69 00  6d 00 65 00 00 00 00 00  |d. .T.i.m.e.....| 
+00000180  00 00 02 00 06 00 04 00  17 00 3b 00 3b 00 e7 03  |..........;.;...| 
+00000190  00 00 00 00 45 00 2e 00  20 00 53 00 6f 00 75 00  |....E... .S.o.u.| 
+000001a0  74 00 68 00 20 00 41 00  6d 00 65 00 72 00 69 00  |t.h. .A.m.e.r.i.| 
+000001b0  63 00 61 00 20 00 44 00  61 00 79 00 6c 00 69 00  |c.a. .D.a.y.l.i.| 
+000001c0  67 00 68 00 74 00 20 00  54 00 69 00 6d 00 65 00  |g.h.t. .T.i.m.e.| 
+000001d0  00 00 00 00 00 00 0a 00  06 00 03 00 17 00 3b 00  |..............;.| 
+000001e0  3b 00 e7 03 c4 ff ff ff                           |;...............| 
+....
+
+==== Miscellaneous information flags
+
+[cols="1,1,5",options="header"]
+|===
+| Value | Identifier | Description
+| 0x00000001 | MINIDUMP_MISC1_PROCESS_ID | The process identifier (PID) value in the miscellaneous information stream is set
+| 0x00000002 | MINIDUMP_MISC1_PROCESS_TIMES | The process creation time, process user time and process kernel time values in the miscellaneous information stream are set
+| 0x00000004 | MINIDUMP_MISC1_PROCESSOR_POWER_INFO | The processor maximum MHz, processor current MHz, processor MHz limit, processor maximum idle state and processor current idle state values in the miscellaneous information stream are set
+|===
 
 === [[module_information_stream]]Module information stream
+The module information stream (MINIDUMP_MODULE_LIST) is variable of size and 
+consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Number of modules
+| 4 | ... | | Array of module information entries
+|===
+
+The thread information entry (MINIDUMP_MODULE) is [yellow-background]*TODO: add text*
+
+[yellow-background]*TODO: check the offset and sizes*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | [yellow-background]*Unknown (Image base)*
+| 8 | 4 | | Image size
+| 12 | 4 | | Checksum +
+[yellow-background]*TODO: determine which type of checksum and what data it checks*
+| 16 | 4 | | Timestamp +
+Contains a POSIX timestamp
+| 20 | 4 | | Module name RVA +
+Contains an offset relative to the start of the file
+| 24 | 52 | | Version information +
+PE/COFF fixed file version information +
+Also see: `[LIBEXE]`
+| 76 | [yellow-background]*8* | | CodeView record location descriptor +
+See section: <<location_description,Location descriptor>> +
+The location descriptor points to a PDB RSDS structure
+| | [yellow-background]*8* | | Miscellaneous record location descriptor +
+See section: <<location_description,Location descriptor>>
+| | 8 | | [yellow-background]*Unknown (Reserved)*
+| | 8 | | [yellow-background]*Unknown (Reserved)*
+|===
 
 === [[operation_list_information_stream]]Operation list information stream
+The operation list information stream consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+* operation list information header
+* array of operation list information entries
+
+The operation list information header (MINIDUMP_HANDLE_OPERATION_LIST) is 16 bytes of size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | 16 | Header size +
+Includes the header size value itself
+| 4 | 4 | | Entry size
+| 8 | 4 | | Number of entries
+| 12 | 4 | | [yellow-background]*Unknown (reserved)*
+|===
+
+The operation list information entry (AVRF_HANDLE_OPERATION) is [yellow-background]*TODO*
+....
+typedef struct {
+  ULONG64                    Handle;
+  ULONG                      ProcessId;
+  ULONG                      ThreadId;
+  ULONG                      OperationType;
+  ULONG                      Spare0;
+  AVRF_BACKTRACE_INFORMATION BackTraceInformation;
+} AVRF_HANDLE_OPERATION;
+....
 
 === [[thread_information_stream]]Thread information stream
 The thread information stream (MINIDUMP_THREAD_LIST) is variable of size and 
@@ -354,7 +681,7 @@ consists of:
 |===
 | Offset | Size | Value | Description
 | 0 | 4 | | Number of threads
-| 4 | ...  | | Array of thread information entries
+| 4 | ... | | Array of thread information entries
 |===
 
 === Thread information entry
@@ -368,19 +695,83 @@ The thread information entry (MINIDUMP_THREAD) is [yellow-background]*TODO: add 
 | 8 | 4 | | Priority class
 | 12 | 4 | | Priority
 | 16 | 8 | | Thread Environment Block (TEB)
-| 24 | ...  | | Stack memory descriptor +
+| 24 | ... | | Stack memory descriptor +
 See section: [yellow-background]*TODO: add text*
 | ... | ... | | Thread context location descriptor +
 See section: <<locaton_descriptor,Location descriptor>>
 |===
 
 === [[thread_state_information_stream]]Thread state information stream
+The thread state information stream consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+* thread state information header
+* array of thread state information entries
+
+The thread state information header (MINIDUMP_THREAD_INFO_LIST) is 12 bytes of 
+size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | 12 | Header size +
+Includes the header size value itself
+| 4 | 4 | | Entry size
+| 8 | 4 | | Number of entries
+|===
+
+The thread state information entry (MINIDUMP_THREAD_INFO) is [yellow-background]*TODO*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | | Thread identifier
+| 4 | 4 | | [yellow-background]*Unknown (Dump flags)*
+| 8 | 4 | | [yellow-background]*Unknown (Dump error)*
+| 12 | 4 | | [yellow-background]*Unknown (Exit status)*
+| 16 | 8 | | Creation time +
+[yellow-background]*Contains a FILETIME?*
+| 24 | 8 | | Exit time +
+[yellow-background]*Contains a FILETIME?*
+| 32 | 8 | | Kernel time +
+[yellow-background]*Contains a FILETIME?*
+| 40 | 8 | | User time +
+[yellow-background]*Contains a FILETIME?*
+| 48 | 8 | | [yellow-background]*Unknown (Start address)*
+| 56 | 8 | | [yellow-background]*Unknown (Affinity)*
+|===
 
 === [[unloaded_module_information_stream]]Unloaded module information stream
+The unloaded module information stream consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+* unloaded module information header
+* array of unloaded module information entries
+
+The unloaded module information header (MINIDUMP_UNLOADED_MODULE_LIST) is 12 
+bytes of size and consists of:
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 4 | 12 | Header size +
+Includes the header size value itself
+| 4 | 4 | | Entry size
+| 8 | 4 | | Number of entries
+|===
+
+The unloaded module information entry (MINIDUMP_UNLOADED_MODULE) is [yellow-background]*TODO*
+
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 8 | | [yellow-background]*Unknown (Image base)*
+| 8 | 4 | | [yellow-background]*Unknown (Image size)*
+| 12 | 4 | | [yellow-background]*Unknown (Checksum)* +
+[yellow-background]*TODO: determine which type of checksum and what data it checks*
+| 16 | 4 | | [yellow-background]*Unknown (Timestamp)* +
+[yellow-background]*TODO: What does it signify?*
+| 20 | 4 | | [yellow-background]*Unknown (Module name RVA)* +
+[yellow-background]*Contains an offset relative to the start of the file*
+|===
 
 === [[user_defined_stream]]User defined stream
 
