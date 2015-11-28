@@ -384,8 +384,33 @@ Attempt to execute non-executable address 001363c0
 ....
 
 ==== Exception codes
+[yellow-background]*TODO: add text*
 
-[yellow-background]*TODO: migrate remaining documentation*
+[cols="1,1,5",options="header"]
+|===
+| Value | Identifier | Description
+| 0xc0000005 | EXCEPTION_ACCESS_VIOLATION | [yellow-background]*The thread tried to read from or write to a virtual address for which it does not have the appropriate access.*
+| | | 
+| 0xc000008c | EXCEPTION_ARRAY_BOUNDS_EXCEEDED | [yellow-background]*The thread tried to access an array element that is out of bounds and the underlying hardware supports bounds checking.*
+| | EXCEPTION_BREAKPOINT | [yellow-background]*A breakpoint was encountered.*
+| | EXCEPTION_DATATYPE_MISALIGNMENT | [yellow-background]*The thread tried to read or write data that is misaligned on hardware that does not provide alignment. For example, 16-bit values must be aligned on 2-byte boundaries; 32-bit values on 4-byte boundaries, and so on.*
+| | EXCEPTION_FLT_DENORMAL_OPERAND | [yellow-background]*One of the operands in a floating-point operation is denormal. A denormal value is one that is too small to represent as a standard floating-point value.*
+| | EXCEPTION_FLT_DIVIDE_BY_ZERO | [yellow-background]*The thread tried to divide a floating-point value by a floating-point divisor of zero.*
+| | EXCEPTION_FLT_INEXACT_RESULT | [yellow-background]*The result of a floating-point operation cannot be represented exactly as a decimal fraction.*
+| | EXCEPTION_FLT_INVALID_OPERATION | [yellow-background]*This exception represents any floating-point exception not included in this list.*
+| | EXCEPTION_FLT_OVERFLOW | [yellow-background]*The exponent of a floating-point operation is greater than the magnitude allowed by the corresponding type.*
+| | EXCEPTION_FLT_STACK_CHECK | [yellow-background]*The stack overflowed or underflowed as the result of a floating-point operation.*
+| | EXCEPTION_FLT_UNDERFLOW | [yellow-background]*The exponent of a floating-point operation is less than the magnitude allowed by the corresponding type.*
+| 0xc000001d | EXCEPTION_ILLEGAL_INSTRUCTION | [yellow-background]*The thread tried to execute an invalid instruction.*
+| | EXCEPTION_IN_PAGE_ERROR | [yellow-background]*The thread tried to access a page that was not present, and the system was unable to load the page. For example, this exception might occur if a network connection is lost while running a program over the network.*
+| 0xc0000094 | EXCEPTION_INT_DIVIDE_BY_ZERO | [yellow-background]*The thread tried to divide an integer value by an integer divisor of zero.*
+| 0xc0000095 | EXCEPTION_INT_OVERFLOW | [yellow-background]*The result of an integer operation caused a carry out of the most significant bit of the result.*
+| 0xc0000026 | EXCEPTION_INVALID_DISPOSITION | [yellow-background]*An exception handler returned an invalid disposition to the exception dispatcher. Programmers using a high-level language such as C should never encounter this exception.*
+| 0xc0000025 | EXCEPTION_NONCONTINUABLE_EXCEPTION | [yellow-background]*The thread tried to continue execution after a non-continuable exception occurred.*
+| | EXCEPTION_PRIV_INSTRUCTION | [yellow-background]*The thread tried to execute an instruction whose operation is not allowed in the current machine mode.*
+| | EXCEPTION_SINGLE_STEP | [yellow-background]*A trace trap or other single-instruction mechanism signaled that one instruction has been executed.*
+| 0xc00000fd | EXCEPTION_STACK_OVERFLOW | [yellow-background]*The thread used up its stack.*
+|===
 
 ==== Exception flags
 
@@ -461,8 +486,42 @@ is [yellow-background]*TODO*
 |===
 
 === [[general_system_information_stream]]General system information stream
+The general system information stream (MINIDUMP_SYSTEM_INFO) is 56 bytes of 
+size and consists of:
 
-[yellow-background]*TODO: migrate remaining documentation*
+[cols="1,1,1,5",options="header"]
+|===
+| Offset | Size | Value | Description
+| 0 | 2 | | Processor architecture
+| 2 | 2 | | Processor level
+| 4 | 2 | | Processor revision
+4+| [yellow-background]*Unknown criteria*
+| 6 | 2 | | [yellow-background]*Unknown (reserved)*
+4+| [yellow-background]*Unknown criteria*
+| 6 | 1 | | Number of processors or reserved
+| 7 | 1 | | Product type or reserved
+4+| [yellow-background]*Common*
+| 8 | 4 | | Major version
+| 12 | 4 | | Minor version
+| 16 | 4 | | Build number
+| 20 | 4 | | Platform identifier
+| 24 | 4 | | CSD version RVA +
+Contains an offset relative to the start of the file
+4+| [yellow-background]*Unknown criteria*
+| 28 | 4 | | [yellow-background]*Unknown (reserved)*
+4+| [yellow-background]*Unknown criteria*
+| 28 | 2 | | Suite mask
+| 30 | 2 | | [yellow-background]*Unknown (reserved)* +
+4+| [yellow-background]*X86CpuInfo: Unknown criteria*
+| 32 | 3 x 4 | | Vendor identifier
+| 44 | 4 | | Version information
+| 48 | 4 | | Feature information
+| 52 | 4 | | AMD extended CPU features
+4+| [yellow-background]*OtherCpuInfo: Unknown criteria*
+| 32 | 2 x 8 | | Processor features
+| 48 | 8 | | [yellow-background]*Unknown (padding)* +
+[yellow-background]*Not sure if this value exists the MSDN information suggests it*
+|===
 
 === [[memory_allocation_information_stream_32bit]]32-bit memory allocation information stream
 The 32-bit memory allocation information stream (MINIDUMP_MEMORY_LIST) is 
