@@ -1,7 +1,7 @@
 /*
  * Library open close testing program
  *
- * Copyright (c) 2011-2013, Joachim Metz <joachim.metz@gmail.com>
+ * Copyright (C) 2014-2016, Joachim Metz <joachim.metz@gmail.com>
  *
  * Refer to AUTHORS for acknowledgements.
  *
@@ -20,12 +20,11 @@
  */
 
 #include <common.h>
+#include <file_stream.h>
 
 #if defined( HAVE_STDLIB_H ) || defined( WINAPI )
 #include <stdlib.h>
 #endif
-
-#include <stdio.h>
 
 #include "mdmp_test_libcerror.h"
 #include "mdmp_test_libcstring.h"
