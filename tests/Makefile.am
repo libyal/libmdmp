@@ -11,6 +11,8 @@ AM_CPPFLAGS = \
 	@LIBCFILE_CPPFLAGS@ \
 	@LIBCPATH_CPPFLAGS@ \
 	@LIBBFIO_CPPFLAGS@ \
+	@LIBCSYSTEM_CPPFLAGS@ \
+	@PTHREAD_CPPFLAGS@ \
 	@LIBMDMP_DLL_IMPORT@
 
 TESTS = \
@@ -32,18 +34,13 @@ mdmp_test_open_close_SOURCES = \
 	mdmp_test_libcerror.h \
 	mdmp_test_libmdmp.h \
 	mdmp_test_libcstring.h \
+	mdmp_test_libcsystem.h \
 	mdmp_test_open_close.c
 
 mdmp_test_open_close_LDADD = \
+	@LIBCSYSTEM_LIBADD@ \
 	../libmdmp/libmdmp.la \
-	@LIBBFIO_LIBADD@ \
-	@LIBCPATH_LIBADD@ \
-	@LIBCFILE_LIBADD@ \
-	@LIBUNA_LIBADD@ \
-	@LIBCSPLIT_LIBADD@ \
-	@LIBCNOTIFY_LIBADD@ \
-	@LIBCLOCALE_LIBADD@ \
-	@LIBCDATA_LIBADD@ \
+	@LIBCTHREADS_LIBADD@ \
 	@LIBCERROR_LIBADD@ \
 	@LIBCSTRING_LIBADD@
 
