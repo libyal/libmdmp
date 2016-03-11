@@ -41,9 +41,9 @@ typedef struct libmdmp_stream {}	libmdmp_stream_t;
 typedef intptr_t libmdmp_file_t;
 typedef intptr_t libmdmp_stream_t;
 
-#endif
+#endif /* defined( HAVE_DEBUG_OUTPUT ) && !defined( WINAPI ) */
 
-#endif
+#endif /* defined( HAVE_LOCAL_LIBMDMP ) */
 
-#endif
+#endif /* !defined( _LIBMDMP_INTERNAL_TYPES_H ) */
 

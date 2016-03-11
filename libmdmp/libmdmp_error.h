@@ -64,11 +64,11 @@ int libmdmp_error_backtrace_sprint(
      char *string,
      size_t size );
 
-#endif
+#endif /* !defined( HAVE_LOCAL_LIBMDMP ) */
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_INTERNAL_ERROR_H ) */
 

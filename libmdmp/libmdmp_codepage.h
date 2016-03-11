@@ -80,11 +80,11 @@ enum LIBMDMP_CODEPAGES
 	LIBMDMP_CODEPAGE_WINDOWS_1258			= 1258
 };
 
-#endif
+#endif /* !defined( HAVE_LOCAL_LIBMDMP ) */
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_INTERNAL_CODEPAGE_H ) */
 

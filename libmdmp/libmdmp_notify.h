@@ -53,11 +53,11 @@ LIBMDMP_EXTERN \
 int libmdmp_notify_stream_close(
      libcerror_error_t **error );
 
-#endif
+#endif /* !defined( HAVE_LOCAL_LIBMDMP ) */
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_NOTIFY_H ) */
 

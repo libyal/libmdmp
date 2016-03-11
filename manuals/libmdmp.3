@@ -1,9 +1,9 @@
-.Dd January  5, 2015
+.Dd February  1, 2016
 .Dt libmdmp 3
 .Os libmdmp
 .Sh NAME
 .Nm libmdmp.h
-.Nd Library to access the Windows Minidump (MDMP) file format
+.Nd Library to access the Windows Minidump (MDMP) format
 .Sh LIBRARY
 .Lb libmdmp
 .Sh SYNOPSIS
@@ -96,8 +96,6 @@ Stream functions
 .Fn libmdmp_stream_get_start_offset "libmdmp_stream_t *stream, off64_t *start_offset, libmdmp_error_t **error"
 .Ft int
 .Fn libmdmp_stream_get_virtual_address "libmdmp_stream_t *stream, uint32_t *virtual_address, libmdmp_error_t **error"
-.Ft #endif
-.Fn 
 .Pp
 Available when compiled with libbfio support:
 .Ft int
@@ -113,6 +111,7 @@ For the actual return values see "libmdmp.h".
 None
 .Sh FILES
 None
+.Sh NOTES
 libmdmp allows to be compiled with wide character support (wchar_t).
 
 To compile libmdmp with wide character support use:
