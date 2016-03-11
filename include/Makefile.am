@@ -1,13 +1,13 @@
 include_HEADERS = \
-        libmdmp.h
+	libmdmp.h
 
 pkginclude_HEADERS = \
-        libmdmp/codepage.h \
-        libmdmp/definitions.h \
-        libmdmp/error.h \
-        libmdmp/extern.h \
-        libmdmp/features.h \
-        libmdmp/types.h
+	libmdmp/codepage.h \
+	libmdmp/definitions.h \
+	libmdmp/error.h \
+	libmdmp/extern.h \
+	libmdmp/features.h \
+	libmdmp/types.h
 
 EXTRA_DIST = \
 	libmdmp.h.in \

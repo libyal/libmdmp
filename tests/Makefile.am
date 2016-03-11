@@ -27,7 +27,7 @@ check_SCRIPTS = \
 EXTRA_DIST = \
 	$(check_SCRIPTS)
 
-check_PROGRAMS =  \
+check_PROGRAMS = \
 	mdmp_test_open_close
 
 mdmp_test_open_close_SOURCES = \
@@ -42,7 +42,8 @@ mdmp_test_open_close_LDADD = \
 	../libmdmp/libmdmp.la \
 	@LIBCTHREADS_LIBADD@ \
 	@LIBCERROR_LIBADD@ \
-	@LIBCSTRING_LIBADD@
+	@LIBCSTRING_LIBADD@ \
+	@PTHREAD_LIBADD@
 
 MAINTAINERCLEANFILES = \
 	Makefile.in
