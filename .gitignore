@@ -119,6 +119,7 @@ stamp-h[1-9]
 /mdmptools/mdmpinfo
 /pymdmp/setup.py
 /tests/input
+/tests/mdmp_test_get_version
 /tests/mdmp_test_open_close
 /tests/tmp*
 

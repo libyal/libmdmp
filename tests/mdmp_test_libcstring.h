@@ -1,7 +1,7 @@
 /*
  * The internal libcstring header
  *
- * Copyright (c) 2014-2016, Joachim Metz <joachim.metz@gmail.com>
+ * Copyright (C) 2014-2016, Joachim Metz <joachim.metz@gmail.com>
  *
  * Refer to AUTHORS for acknowledgements.
  *
@@ -45,7 +45,7 @@
 
 #include <libcstring.h>
 
-#endif
+#endif /* defined( HAVE_LOCAL_LIBCSTRING ) */
 
-#endif
+#endif /* !defined( _MDMP_TEST_LIBCSTRING_H ) */
 

@@ -15,6 +15,7 @@ MSVSCPP_FILES = \
 	libfdatetime/libfdatetime.vcproj \
 	libmdmp/libmdmp.vcproj \
 	libuna/libuna.vcproj \
+	mdmp_test_get_version/mdmp_test_get_version.vcproj \
 	mdmp_test_open_close/mdmp_test_open_close.vcproj \
 	mdmpinfo/mdmpinfo.vcproj \
 	libmdmp.sln
