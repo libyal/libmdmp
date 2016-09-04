@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="mdmp_test_get_version"
-	ProjectGUID="{C6020305-8E56-4A7F-A6CC-AC288F4E46B5}"
-	RootNamespace="mdmp_test_get_version"
+	Name="mdmp_test_error"
+	ProjectGUID="{6EA916F5-E93E-4077-A628-EDC1924B5279}"
+	RootNamespace="mdmp_test_error"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -176,7 +176,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\tests\mdmp_test_get_version.c"
+				RelativePath="..\..\tests\mdmp_test_error.c"
 				>
 			</File>
 		</Filter>

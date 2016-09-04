@@ -28,13 +28,26 @@ EXTRA_DIST = \
 	$(check_SCRIPTS)
 
 check_PROGRAMS = \
+	mdmp_test_error \
 	mdmp_test_get_version \
 	mdmp_test_open_close
+
+mdmp_test_error_SOURCES = \
+	mdmp_test_error.c \
+	mdmp_test_libcstring.h \
+	mdmp_test_libmdmp.h \
+	mdmp_test_macros.h \
+	mdmp_test_unused.h
+
+mdmp_test_error_LDADD = \
+	../libmdmp/libmdmp.la \
+	@LIBCSTRING_LIBADD@
 
 mdmp_test_get_version_SOURCES = \
 	mdmp_test_get_version.c \
 	mdmp_test_libcstring.h \
 	mdmp_test_libmdmp.h \
+	mdmp_test_macros.h \
 	mdmp_test_unused.h
 
 mdmp_test_get_version_LDADD = \

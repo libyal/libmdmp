@@ -1,5 +1,5 @@
 /*
- * Notification functions
+ * Memory allocation functions for testing
  *
  * Copyright (C) 2014-2016, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -19,45 +19,32 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _LIBMDMP_NOTIFY_H )
-#define _LIBMDMP_NOTIFY_H
+#if !defined( _MDMP_TEST_MEMORY_H )
+#define _MDMP_TEST_MEMORY_H
 
 #include <common.h>
-#include <file_stream.h>
-#include <types.h>
-
-#include "libmdmp_extern.h"
-#include "libmdmp_libcerror.h"
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-#if !defined( HAVE_LOCAL_LIBMDMP )
+#if defined( HAVE_GNU_DL_DLSYM ) && defined( __GNUC__ ) && !defined( __clang__ )
 
-LIBMDMP_EXTERN \
-void libmdmp_notify_set_verbose(
-      int verbose );
+#define HAVE_MDMP_TEST_MEMORY		1
 
-LIBMDMP_EXTERN \
-int libmdmp_notify_set_stream(
-     FILE *stream,
-     libcerror_error_t **error );
+extern int mdmp_test_malloc_attempts_before_fail;
 
-LIBMDMP_EXTERN \
-int libmdmp_notify_stream_open(
-     const char *filename,
-     libcerror_error_t **error );
+extern int mdmp_test_memcpy_attempts_before_fail;
 
-LIBMDMP_EXTERN \
-int libmdmp_notify_stream_close(
-     libcerror_error_t **error );
+extern int mdmp_test_memset_attempts_before_fail;
 
-#endif /* !defined( HAVE_LOCAL_LIBMDMP ) */
+extern int mdmp_test_realloc_attempts_before_fail;
+
+#endif /* defined( HAVE_GNU_DL_DLSYM ) && defined( __GNUC__ ) && !defined( __clang__ ) */
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif /* !defined( _LIBMDMP_NOTIFY_H ) */
+#endif /* !defined( _MDMP_TEST_MEMORY_H ) */
 
