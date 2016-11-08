@@ -1,7 +1,6 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir)/include \
 	-I$(top_srcdir)/common \
-	@LIBCSTRING_CPPFLAGS@ \
 	@LIBCERROR_CPPFLAGS@ \
 	@LIBCTHREADS_CPPFLAGS@ \
 	@LIBCDATA_CPPFLAGS@ \
@@ -33,7 +32,6 @@ libmdmp_la_SOURCES = \
 	libmdmp_libcerror.h \
 	libmdmp_libclocale.h \
 	libmdmp_libcnotify.h \
-	libmdmp_libcstring.h \
 	libmdmp_libfdata.h \
 	libmdmp_libfdatetime.h \
 	libmdmp_libuna.h \
@@ -47,7 +45,6 @@ libmdmp_la_SOURCES = \
 	mdmp_file_header.h
 
 libmdmp_la_LIBADD = \
-	@LIBCSTRING_LIBADD@ \
 	@LIBCERROR_LIBADD@ \
 	@LIBCTHREADS_LIBADD@ \
 	@LIBCDATA_LIBADD@ \

@@ -21,7 +21,9 @@
 
 #include <common.h>
 #include <memory.h>
+#include <narrow_string.h>
 #include <types.h>
+#include <wide_string.h>
 
 #include "libmdmp_codepage.h"
 #include "libmdmp_definitions.h"
@@ -29,7 +31,6 @@
 #include "libmdmp_libbfio.h"
 #include "libmdmp_libcerror.h"
 #include "libmdmp_libclocale.h"
-#include "libmdmp_libcstring.h"
 #include "libmdmp_support.h"
 
 #if !defined( HAVE_LOCAL_LIBMDMP )
@@ -127,7 +128,7 @@ int libmdmp_check_file_signature(
 
 		return( -1 );
 	}
-	filename_length = libcstring_narrow_string_length(
+	filename_length = narrow_string_length(
 	                   filename );
 
 	if( filename_length == 0 )
@@ -234,7 +235,7 @@ int libmdmp_check_file_signature_wide(
 
 		return( -1 );
 	}
-	filename_length = libcstring_wide_string_length(
+	filename_length = wide_string_length(
 	                   filename );
 
 	if( filename_length == 0 )

@@ -24,13 +24,16 @@
 
 /* The libmdmp type support features
  */
-#if @HAVE_WIDE_CHARACTER_TYPE@ || defined( HAVE_WIDE_CHARACTER_TYPE )
-#define LIBMDMP_HAVE_WIDE_CHARACTER_TYPE		1
+#if defined( WINAPI ) || @HAVE_WIDE_CHARACTER_TYPE@
+#define LIBMDMP_HAVE_WIDE_CHARACTER_TYPE	1
+#endif
 
+#if defined( WINAPI ) || @HAVE_MULTI_THREAD_SUPPORT@
+#define LIBMDMP_HAVE_MULTI_THREAD_SUPPORT	1
 #endif
 
 #if defined( HAVE_LIBBFIO ) || ( !defined( WINAPI ) && @HAVE_LIBBFIO@ )
-#define LIBMDMP_HAVE_BFIO				1
+#define LIBMDMP_HAVE_BFIO			1
 #endif
 
 #if !defined( LIBMDMP_DEPRECATED )
@@ -43,5 +46,5 @@
 #endif
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_FEATURES_H ) */
 

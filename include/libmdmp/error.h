@@ -34,12 +34,12 @@ enum LIBMDMP_ERROR_DOMAINS
 {
 	LIBMDMP_ERROR_DOMAIN_ARGUMENTS			= (int) 'a',
 	LIBMDMP_ERROR_DOMAIN_CONVERSION			= (int) 'c',
-	LIBMDMP_ERROR_DOMAIN_COMPRESSION			= (int) 'C',
+	LIBMDMP_ERROR_DOMAIN_COMPRESSION		= (int) 'C',
 	LIBMDMP_ERROR_DOMAIN_IO				= (int) 'I',
 	LIBMDMP_ERROR_DOMAIN_INPUT			= (int) 'i',
 	LIBMDMP_ERROR_DOMAIN_MEMORY			= (int) 'm',
 	LIBMDMP_ERROR_DOMAIN_OUTPUT			= (int) 'o',
-	LIBMDMP_ERROR_DOMAIN_RUNTIME			= (int) 'r',
+	LIBMDMP_ERROR_DOMAIN_RUNTIME			= (int) 'r'
 };
 
 /* The argument error codes
@@ -59,7 +59,7 @@ enum LIBMDMP_ARGUMENT_ERROR
 
 	/* The argument contains a value zero or less
 	 */
-	LIBMDMP_ARGUMENT_ERROR_VALUE_ZERO_OR_LESS		= 3,
+	LIBMDMP_ARGUMENT_ERROR_VALUE_ZERO_OR_LESS	= 3,
 
 	/* The argument contains a value that exceeds the maximum
 	 * for the specific type
@@ -80,11 +80,11 @@ enum LIBMDMP_ARGUMENT_ERROR
 
 	/* The argument contains a value that is not supported
 	 */
-	LIBMDMP_ARGUMENT_ERROR_UNSUPPORTED_VALUE		= 8,
+	LIBMDMP_ARGUMENT_ERROR_UNSUPPORTED_VALUE	= 8,
 
 	/* The argument contains a value that conficts with another argument
 	 */
-	LIBMDMP_ARGUMENT_ERROR_CONFLICTING_VALUE		= 9
+	LIBMDMP_ARGUMENT_ERROR_CONFLICTING_VALUE	= 9
 };
 
 /* The conversion error codes
@@ -92,7 +92,7 @@ enum LIBMDMP_ARGUMENT_ERROR
  */
 enum LIBMDMP_CONVERSION_ERROR
 {
-	LIBMDMP_CONVERSION_ERROR_GENERIC			= 0,
+	LIBMDMP_CONVERSION_ERROR_GENERIC		= 0,
 
 	/* The conversion failed on the input
 	 */
@@ -108,11 +108,11 @@ enum LIBMDMP_CONVERSION_ERROR
  */
 enum LIBMDMP_COMPRESSION_ERROR
 {
-	LIBMDMP_COMPRESSION_ERROR_GENERIC			= 0,
+	LIBMDMP_COMPRESSION_ERROR_GENERIC		= 0,
 
 	/* The compression failed
 	 */
-	LIBMDMP_COMPRESSION_ERROR_COMPRESS_FAILED		= 1,
+	LIBMDMP_COMPRESSION_ERROR_COMPRESS_FAILED	= 1,
 
 	/* The decompression failed
 	 */
@@ -124,7 +124,7 @@ enum LIBMDMP_COMPRESSION_ERROR
  */
 enum LIBMDMP_IO_ERROR
 {
-	LIBMDMP_IO_ERROR_GENERIC				= 0,
+	LIBMDMP_IO_ERROR_GENERIC			= 0,
 
 	/* The open failed
 	 */
@@ -152,7 +152,7 @@ enum LIBMDMP_IO_ERROR
 
 	/* The resource is invalid i.e. a missing file
 	 */
-	LIBMDMP_IO_ERROR_INVALID_RESOURCE			= 7,
+	LIBMDMP_IO_ERROR_INVALID_RESOURCE		= 7,
 
 	/* The ioctl failed
 	 */
@@ -172,7 +172,7 @@ enum LIBMDMP_INPUT_ERROR
 
 	/* The input contains invalid data
 	 */
-	LIBMDMP_INPUT_ERROR_INVALID_DATA			= 1,
+	LIBMDMP_INPUT_ERROR_INVALID_DATA		= 1,
 
 	/* The input contains an unsupported signature
 	 */
@@ -197,15 +197,26 @@ enum LIBMDMP_MEMORY_ERROR
 
 	/* There is insufficient memory available
 	 */
-	LIBMDMP_MEMORY_ERROR_INSUFFICIENT			= 1,
+	LIBMDMP_MEMORY_ERROR_INSUFFICIENT		= 1,
 
 	/* The memory failed to be copied
 	 */
-	LIBMDMP_MEMORY_ERROR_COPY_FAILED			= 2,
+	LIBMDMP_MEMORY_ERROR_COPY_FAILED		= 2,
 
 	/* The memory failed to be set
 	 */
 	LIBMDMP_MEMORY_ERROR_SET_FAILED			= 3
+};
+
+/* The output error codes
+ */
+enum LIBMDMP_OUTPUT_ERROR
+{
+	LIBMDMP_OUTPUT_ERROR_GENERIC			= 0,
+
+	/* There is insuficient space to write the output
+	 */
+	LIBMDMP_OUTPUT_ERROR_INSUFFICIENT_SPACE		= 1
 };
 
 /* The runtime error codes
@@ -237,11 +248,11 @@ enum LIBMDMP_RUNTIME_ERROR
 
 	/* The value could not be determined
 	 */
-	LIBMDMP_RUNTIME_ERROR_GET_FAILED			= 6,
+	LIBMDMP_RUNTIME_ERROR_GET_FAILED		= 6,
 
 	/* The value could not be set
 	 */
-	LIBMDMP_RUNTIME_ERROR_SET_FAILED			= 7,
+	LIBMDMP_RUNTIME_ERROR_SET_FAILED		= 7,
 
 	/* The value could not be appended/prepended
 	 */
@@ -249,7 +260,7 @@ enum LIBMDMP_RUNTIME_ERROR
 
 	/* The value could not be copied
 	 */
-	LIBMDMP_RUNTIME_ERROR_COPY_FAILED			= 9,
+	LIBMDMP_RUNTIME_ERROR_COPY_FAILED		= 9,
 
 	/* The value could not be removed
 	 */
@@ -261,7 +272,7 @@ enum LIBMDMP_RUNTIME_ERROR
 
 	/* The value was out of bounds
 	 */
-	LIBMDMP_RUNTIME_ERROR_VALUE_OUT_OF_BOUNDS		= 12,
+	LIBMDMP_RUNTIME_ERROR_VALUE_OUT_OF_BOUNDS	= 12,
 
 	/* The value exceeds the maximum for its specific type
 	 */
@@ -276,16 +287,5 @@ enum LIBMDMP_RUNTIME_ERROR
 	LIBMDMP_RUNTIME_ERROR_ABORT_REQUESTED		= 15
 };
 
-/* The output error codes
- */
-enum LIBMDMP_OUTPUT_ERROR
-{
-	LIBMDMP_OUTPUT_ERROR_GENERIC			= 0,
-
-	/* There is insuficient space to write the output
-	 */
-	LIBMDMP_OUTPUT_ERROR_INSUFFICIENT_SPACE		= 1
-};
-
-#endif
+#endif /* !defined( _LIBMDMP_ERROR_H ) */
 

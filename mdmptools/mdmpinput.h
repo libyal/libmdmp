@@ -26,14 +26,13 @@
 #include <types.h>
 
 #include "mdmptools_libcerror.h"
-#include "mdmptools_libcstring.h"
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
 int mdmpinput_determine_ascii_codepage(
-     const libcstring_system_character_t *string,
+     const system_character_t *string,
      int *ascii_codepage,
      libcerror_error_t **error );
 

@@ -20,6 +20,8 @@
  */
 
 #include <common.h>
+#include <file_stream.h>
+#include <types.h>
 
 #if defined( HAVE_STDLIB_H ) || defined( WINAPI )
 #include <stdlib.h>
@@ -108,7 +110,7 @@ int mdmp_test_error_backtrace_sprint(
 
 /* The main program
  */
-#if defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER )
+#if defined( HAVE_WIDE_SYSTEM_CHARACTER )
 int wmain(
      int argc MDMP_TEST_ATTRIBUTE_UNUSED,
      wchar_t * const argv[] MDMP_TEST_ATTRIBUTE_UNUSED )
@@ -123,23 +125,23 @@ int main(
 
 	MDMP_TEST_RUN(
 	 "libmdmp_error_free",
-	 mdmp_test_error_free() )
+	 mdmp_test_error_free );
 
 	MDMP_TEST_RUN(
 	 "libmdmp_error_fprint",
-	 mdmp_test_error_fprint() )
+	 mdmp_test_error_fprint );
 
 	MDMP_TEST_RUN(
 	 "libmdmp_error_sprint",
-	 mdmp_test_error_sprint() )
+	 mdmp_test_error_sprint );
 
 	MDMP_TEST_RUN(
 	 "libmdmp_error_backtrace_fprint",
-	 mdmp_test_error_backtrace_fprint() )
+	 mdmp_test_error_backtrace_fprint );
 
 	MDMP_TEST_RUN(
 	 "libmdmp_error_backtrace_sprint",
-	 mdmp_test_error_backtrace_sprint() )
+	 mdmp_test_error_backtrace_sprint );
 
 	return( EXIT_SUCCESS );
 

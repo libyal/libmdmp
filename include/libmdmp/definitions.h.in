@@ -50,5 +50,5 @@ enum LIBMDMP_ACCESS_FLAGS
 /* Reserved: not supported yet */
 #define LIBMDMP_OPEN_READ_WRITE				( LIBMDMP_ACCESS_FLAG_READ | LIBMDMP_ACCESS_FLAG_WRITE )
 
-#endif
+#endif /* !defined( _LIBMDMP_DEFINITIONS_H ) */
 

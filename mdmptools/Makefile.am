@@ -1,7 +1,6 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir)/include \
 	-I$(top_srcdir)/common \
-	@LIBCSTRING_CPPFLAGS@ \
 	@LIBCERROR_CPPFLAGS@ \
 	@LIBCDATA_CPPFLAGS@ \
 	@LIBCLOCALE_CPPFLAGS@ \
@@ -29,7 +28,6 @@ mdmpinfo_SOURCES = \
 	mdmptools_libcerror.h \
 	mdmptools_libclocale.h \
 	mdmptools_libcnotify.h \
-	mdmptools_libcstring.h \
 	mdmptools_libcsystem.h \
 	mdmptools_libfdatetime.h \
 	mdmptools_libmdmp.h \
@@ -41,7 +39,6 @@ mdmpinfo_LDADD = \
 	@LIBCNOTIFY_LIBADD@ \
 	@LIBCLOCALE_LIBADD@ \
 	@LIBCERROR_LIBADD@ \
-	@LIBCSTRING_LIBADD@ \
 	@LIBINTL@
 
 MAINTAINERCLEANFILES = \

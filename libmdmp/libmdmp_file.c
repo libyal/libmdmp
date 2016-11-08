@@ -21,7 +21,9 @@
 
 #include <common.h>
 #include <memory.h>
+#include <narrow_string.h>
 #include <types.h>
+#include <wide_string.h>
 
 #include "libmdmp_codepage.h"
 #include "libmdmp_debug.h"
@@ -32,7 +34,6 @@
 #include "libmdmp_libcdata.h"
 #include "libmdmp_libcerror.h"
 #include "libmdmp_libcnotify.h"
-#include "libmdmp_libcstring.h"
 #include "libmdmp_stream.h"
 #include "libmdmp_stream_descriptor.h"
 
@@ -355,7 +356,7 @@ int libmdmp_file_open(
 	if( libbfio_file_set_name(
 	     file_io_handle,
 	     filename,
-	     libcstring_narrow_string_length(
+	     narrow_string_length(
 	      filename ) + 1,
 	     error ) != 1 )
 	{
@@ -492,7 +493,7 @@ int libmdmp_file_open_wide(
 	if( libbfio_file_set_name_wide(
 	     file_io_handle,
 	     filename,
-	     libcstring_wide_string_length(
+	     wide_string_length(
 	      filename ) + 1,
 	     error ) != 1 )
 	{

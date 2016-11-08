@@ -21,7 +21,7 @@ BEGIN
   BEGIN
     BLOCK "040904E4"
     BEGIN
-      VALUE "FileDescription",		"Library to access the Windows Minidump (MDMP) file format\0"
+      VALUE "FileDescription",		"Library to access the Windows Minidump (MDMP) format\0"
       VALUE "FileVersion",		"@VERSION@" "\0"
       VALUE "InternalName",		"libmdmp.dll\0"
       VALUE "LegalCopyright",		"(C) 2014-2016, Joachim Metz <joachim.metz@gmail.com>\0"
