@@ -63,5 +63,5 @@ int libmdmp_stream_descriptor_set_data_range(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_STREAM_DESCRIPTOR_H ) */
 

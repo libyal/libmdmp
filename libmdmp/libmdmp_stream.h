@@ -121,5 +121,5 @@ int libmdmp_stream_get_data_file_io_handle(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_INTERNAL_STREAM_H ) */
 

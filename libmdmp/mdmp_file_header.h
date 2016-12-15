@@ -99,5 +99,5 @@ struct mdmp_streams_directory_entry
 }
 #endif
 
-#endif
+#endif /* !defined( _MDMP_FILE_HEADER_H ) */
 

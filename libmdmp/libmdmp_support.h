@@ -78,5 +78,5 @@ int libmdmp_check_file_signature_file_io_handle(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_SUPPORT_H ) */
 

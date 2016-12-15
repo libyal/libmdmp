@@ -27,11 +27,11 @@
 /* If Cygwin libtool DLL support is enabled set LIBMDMP_DLL_IMPORT
  * before including libmdmp.h
  */
-#if defined( _WIN32 ) && defined( DLL_EXPORT )
+#if defined( _WIN32 ) && defined( DLL_IMPORT ) && !defined( HAVE_STATIC_EXECUTABLES )
 #define LIBMDMP_DLL_IMPORT
 #endif
 
 #include <libmdmp.h>
 
-#endif
+#endif /* !defined( _MDMPTOOLS_LIBMDMP_H ) */
 

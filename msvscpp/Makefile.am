@@ -16,7 +16,11 @@ MSVSCPP_FILES = \
 	libuna/libuna.vcproj \
 	mdmp_test_error/mdmp_test_error.vcproj \
 	mdmp_test_file/mdmp_test_file.vcproj \
-	mdmp_test_open_close/mdmp_test_open_close.vcproj \
+	mdmp_test_io_handle/mdmp_test_io_handle.vcproj \
+	mdmp_test_notify/mdmp_test_notify.vcproj \
+	mdmp_test_stream/mdmp_test_stream.vcproj \
+	mdmp_test_stream_descriptor/mdmp_test_stream_descriptor.vcproj \
+	mdmp_test_stream_io_handle/mdmp_test_stream_io_handle.vcproj \
 	mdmp_test_support/mdmp_test_support.vcproj \
 	mdmpinfo/mdmpinfo.vcproj \
 	libmdmp.sln

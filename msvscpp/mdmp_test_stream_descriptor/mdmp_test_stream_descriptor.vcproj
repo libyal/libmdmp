@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="mdmp_test_file"
-	ProjectGUID="{65194D06-29DF-41D2-AF01-8AB145918D47}"
-	RootNamespace="mdmp_test_file"
+	Name="mdmp_test_stream_descriptor"
+	ProjectGUID="{A7EE70BD-2867-4918-AFDF-04B6CCDD8129}"
+	RootNamespace="mdmp_test_stream_descriptor"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -176,15 +176,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\tests\mdmp_test_file.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\tests\mdmp_test_getopt.c"
-				>
-			</File>
-			<File
 				RelativePath="..\..\tests\mdmp_test_memory.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\tests\mdmp_test_stream_descriptor.c"
 				>
 			</File>
 		</Filter>
@@ -194,27 +190,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\tests\mdmp_test_getopt.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\tests\mdmp_test_libcerror.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\tests\mdmp_test_libclocale.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\tests\mdmp_test_libcnotify.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\tests\mdmp_test_libmdmp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\tests\mdmp_test_libuna.h"
 				>
 			</File>
 			<File
@@ -223,6 +203,10 @@
 			</File>
 			<File
 				RelativePath="..\..\tests\mdmp_test_memory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\tests\mdmp_test_unused.h"
 				>
 			</File>
 		</Filter>

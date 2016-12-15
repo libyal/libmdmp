@@ -107,5 +107,5 @@ int libmdmp_stream_io_handle_get_size(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_STREAM_IO_HANDLE_H ) */
 

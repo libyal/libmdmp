@@ -40,5 +40,5 @@ int mdmpinput_determine_ascii_codepage(
 }
 #endif
 
-#endif
+#endif /* !defined( _MDMPINPUT_H ) */
 

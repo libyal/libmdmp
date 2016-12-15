@@ -38,9 +38,9 @@
 #include <libmdmp/extern.h>
 
 #else
-#define LIBMDMP_EXTERN	extern
+#define LIBMDMP_EXTERN	/* extern */
 
-#endif
+#endif /* !defined( HAVE_LOCAL_LIBMDMP ) */
 
 #endif /* !defined( _LIBMDMP_INTERNAL_EXTERN_H ) */
 

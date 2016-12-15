@@ -133,5 +133,5 @@ int libmdmp_file_get_stream_by_type(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_INTERNAL_FILE_H ) */
 

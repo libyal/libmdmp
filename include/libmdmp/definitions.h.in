@@ -24,11 +24,11 @@
 
 #include <libmdmp/types.h>
 
-#define LIBMDMP_VERSION					@VERSION@
+#define LIBMDMP_VERSION			@VERSION@
 
 /* The version string
  */
-#define LIBMDMP_VERSION_STRING				"@VERSION@"
+#define LIBMDMP_VERSION_STRING		"@VERSION@"
 
 /* The access flags definitions
  * bit 1        set to 1 for read access
@@ -37,18 +37,18 @@
  */
 enum LIBMDMP_ACCESS_FLAGS
 {
-	LIBMDMP_ACCESS_FLAG_READ			= 0x01,
+	LIBMDMP_ACCESS_FLAG_READ	= 0x01,
 /* Reserved: not supported yet */
-	LIBMDMP_ACCESS_FLAG_WRITE			= 0x02
+	LIBMDMP_ACCESS_FLAG_WRITE	= 0x02
 };
 
 /* The file access macros
  */
-#define LIBMDMP_OPEN_READ				( LIBMDMP_ACCESS_FLAG_READ )
+#define LIBMDMP_OPEN_READ		( LIBMDMP_ACCESS_FLAG_READ )
 /* Reserved: not supported yet */
-#define LIBMDMP_OPEN_WRITE				( LIBMDMP_ACCESS_FLAG_WRITE )
+#define LIBMDMP_OPEN_WRITE		( LIBMDMP_ACCESS_FLAG_WRITE )
 /* Reserved: not supported yet */
-#define LIBMDMP_OPEN_READ_WRITE				( LIBMDMP_ACCESS_FLAG_READ | LIBMDMP_ACCESS_FLAG_WRITE )
+#define LIBMDMP_OPEN_READ_WRITE		( LIBMDMP_ACCESS_FLAG_READ | LIBMDMP_ACCESS_FLAG_WRITE )
 
 #endif /* !defined( _LIBMDMP_DEFINITIONS_H ) */
 

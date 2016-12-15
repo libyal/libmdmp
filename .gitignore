@@ -125,8 +125,10 @@ stamp-h[1-9]
 /tests/input
 /tests/mdmp_test_error
 /tests/mdmp_test_file
-/tests/mdmp_test_open_close
+/tests/mdmp_test_io_handle
+/tests/mdmp_test_notify
 /tests/mdmp_test_stream
+/tests/mdmp_test_stream_descriptor
 /tests/mdmp_test_support
 /tests/tmp*
 

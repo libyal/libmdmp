@@ -1,5 +1,5 @@
 /*
- * Debug functions
+ * GetOpt functions
  *
  * Copyright (C) 2014-2016, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -19,36 +19,50 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _LIBMDMP_DEBUG_H )
-#define _LIBMDMP_DEBUG_H
+#if !defined( _MDMP_TEST_GETOPT_H )
+#define _MDMP_TEST_GETOPT_H
 
 #include <common.h>
 #include <types.h>
 
-#include "libmdmp_libbfio.h"
-#include "libmdmp_libcerror.h"
+/* unistd.h is included here to export getopt, optarg, optind and optopt
+ */
+#if defined( HAVE_UNISTD_H )
+#include <unistd.h>
+#endif
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-#if defined( HAVE_DEBUG_OUTPUT )
+#if defined( HAVE_GETOPT )
+#define mdmp_test_getopt( argument_count, argument_values, options_string ) \
+	getopt( argument_count, argument_values, options_string )
 
-void libmdmp_debug_print_file_flags(
-      uint32_t file_flags );
+#else
 
-const char *libmdmp_debug_get_stream_type(
-             uint32_t stream_type );
+#if !defined( __CYGWIN__ )
+extern int optind;
+extern system_character_t *optarg;
+extern system_integer_t optopt;
 
-int libmdmp_debug_print_read_offsets(
-     libbfio_handle_t *file_io_handle,
-     libcerror_error_t **error );
+#else
+int optind;
+system_character_t *optarg;
+system_integer_t optopt;
 
-#endif
+#endif /* !defined( __CYGWIN__ ) */
+
+system_integer_t mdmp_test_getopt(
+                  int argument_count,
+                  system_character_t * const argument_values[],
+                  const system_character_t *options_string );
+
+#endif /* defined( HAVE_GETOPT ) */
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif /* !defined( _LIBMDMP_DEBUG_H ) */
+#endif /* !defined( _MDMP_TEST_GETOPT_H ) */
 

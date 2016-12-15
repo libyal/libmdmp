@@ -98,5 +98,5 @@ off64_t libmdmp_io_handle_seek_segment_offset(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBMDMP_IO_HANDLE_H ) */
 
