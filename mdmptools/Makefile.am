@@ -28,7 +28,6 @@ mdmpinfo_SOURCES = \
 	mdmptools_libcerror.h \
 	mdmptools_libclocale.h \
 	mdmptools_libcnotify.h \
-	mdmptools_libfdatetime.h \
 	mdmptools_libmdmp.h \
 	mdmptools_libuna.h \
 	mdmptools_signal.c mdmptools_signal.h \

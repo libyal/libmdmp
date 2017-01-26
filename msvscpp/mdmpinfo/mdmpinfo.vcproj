@@ -238,10 +238,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\mdmptools\mdmptools_libfdatetime.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\mdmptools\mdmptools_libmdmp.h"
 				>
 			</File>
