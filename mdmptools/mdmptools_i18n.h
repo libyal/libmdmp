@@ -1,8 +1,5 @@
 /*
- * The extern definition
- *
- * This header should be included in header files that export or import
- * library functions
+ * Internationalization (i18n) functions
  *
  * Copyright (C) 2014-2017, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -22,23 +19,30 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _LIBMDMP_EXTERN_H )
-#define _LIBMDMP_EXTERN_H
+#if !defined( _MDMPTOOLS_I18N_H )
+#define _MDMPTOOLS_I18N_H
 
-/* To export functions from the libmdmp DLL define LIBMDMP_DLL_EXPORT
- * To import functions from the libmdmp DLL define LIBMDMP_DLL_IMPORT
- * Otherwise use default extern statement
- */
-#if defined( LIBMDMP_DLL_EXPORT )
-#define LIBMDMP_EXTERN __declspec(dllexport)
+#include <common.h>
 
-#elif defined( LIBMDMP_DLL_IMPORT )
-#define LIBMDMP_EXTERN extern __declspec(dllimport)
-
-#else
-#define LIBMDMP_EXTERN extern
-
+#if defined( HAVE_LIBINTL_H )
+#include <libintl.h>
 #endif
 
-#endif /* !defined( _LIBMDMP_EXTERN_H ) */
+#if defined( __cplusplus )
+extern "C" {
+#endif
+
+/* TODO for now do nothing i18n-like
+#define	_( string ) \
+	gettext( string )
+*/
+
+#define	_( string ) \
+	string
+
+#if defined( __cplusplus )
+}
+#endif
+
+#endif /* !defined( _MDMPTOOLS_I18N_H ) */
 

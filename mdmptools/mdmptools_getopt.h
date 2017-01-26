@@ -1,5 +1,5 @@
 /*
- * Common input functions for the mdmptools
+ * GetOpt functions
  *
  * Copyright (C) 2014-2017, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -19,26 +19,50 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _MDMPINPUT_H )
-#define _MDMPINPUT_H
+#if !defined( _MDMPTOOLS_GETOPT_H )
+#define _MDMPTOOLS_GETOPT_H
 
 #include <common.h>
 #include <types.h>
 
-#include "mdmptools_libcerror.h"
+/* unistd.h is included here to export getopt, optarg, optind and optopt
+ */
+#if defined( HAVE_UNISTD_H )
+#include <unistd.h>
+#endif
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-int mdmpinput_determine_ascii_codepage(
-     const system_character_t *string,
-     int *ascii_codepage,
-     libcerror_error_t **error );
+#if defined( HAVE_GETOPT )
+#define mdmptools_getopt( argument_count, argument_values, options_string ) \
+	getopt( argument_count, argument_values, options_string )
+
+#else
+
+#if !defined( __CYGWIN__ )
+extern int optind;
+extern system_character_t *optarg;
+extern system_integer_t optopt;
+
+#else
+int optind;
+system_character_t *optarg;
+system_integer_t optopt;
+
+#endif /* !defined( __CYGWIN__ ) */
+
+system_integer_t mdmptools_getopt(
+                  int argument_count,
+                  system_character_t * const argument_values[],
+                  const system_character_t *options_string );
+
+#endif /* defined( HAVE_GETOPT ) */
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif /* !defined( _MDMPINPUT_H ) */
+#endif /* !defined( _MDMPTOOLS_GETOPT_H ) */
 

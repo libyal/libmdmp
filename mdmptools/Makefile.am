@@ -11,7 +11,6 @@ AM_CPPFLAGS = \
 	@LIBCPATH_CPPFLAGS@ \
 	@LIBBFIO_CPPFLAGS@ \
 	@LIBFDATETIME_CPPFLAGS@ \
-	@LIBCSYSTEM_CPPFLAGS@ \
 	@LIBMDMP_DLL_IMPORT@
 
 AM_LDFLAGS = @STATIC_LDFLAGS@
@@ -23,21 +22,23 @@ mdmpinfo_SOURCES = \
 	info_handle.c info_handle.h \
 	mdmpinfo.c \
 	mdmpinput.c mdmpinput.h \
-	mdmpoutput.c mdmpoutput.h \
+	mdmptools_getopt.c mdmptools_getopt.h \
+	mdmptools_i18n.h \
 	mdmptools_libbfio.h \
 	mdmptools_libcerror.h \
 	mdmptools_libclocale.h \
 	mdmptools_libcnotify.h \
-	mdmptools_libcsystem.h \
 	mdmptools_libfdatetime.h \
 	mdmptools_libmdmp.h \
-	mdmptools_libuna.h
+	mdmptools_libuna.h \
+	mdmptools_signal.c mdmptools_signal.h \
+	mdmptools_output.c mdmptools_output.h \
+	mdmptools_unused.h
 
 mdmpinfo_LDADD = \
-	@LIBCSYSTEM_LIBADD@ \
-	../libmdmp/libmdmp.la \
 	@LIBCNOTIFY_LIBADD@ \
 	@LIBCLOCALE_LIBADD@ \
+	../libmdmp/libmdmp.la \
 	@LIBCERROR_LIBADD@ \
 	@LIBINTL@
 

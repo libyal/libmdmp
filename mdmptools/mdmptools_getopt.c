@@ -29,8 +29,8 @@
 #include <stdlib.h>
 #endif
 
-#include "mdmp_test_getopt.h"
-#include "mdmp_test_libcnotify.h"
+#include "mdmptools_getopt.h"
+#include "mdmptools_libcnotify.h"
 
 #if !defined( HAVE_GETOPT )
 
@@ -52,14 +52,14 @@ system_integer_t optopt = 0;
  * Returns the option character processed, or -1 on error,
  * ? if the option was not in the options string, : if the option argument was missing
  */
-system_integer_t mdmp_test_getopt(
+system_integer_t mdmptools_getopt(
                   int argument_count,
                   system_character_t * const argument_values[],
                   const system_character_t *options_string )
 {
 	system_character_t *argument_value = NULL;
 	system_character_t *option_value   = NULL;
-	static char *function              = "mdmp_test_getopt";
+	static char *function              = "mdmptools_getopt";
 	size_t options_string_length       = 0;
 
 	if( optind >= argument_count )

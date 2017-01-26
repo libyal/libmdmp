@@ -1,5 +1,5 @@
 /*
- * Memory allocation functions for testing
+ * Signal handling functions
  *
  * Copyright (C) 2014-2017, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -19,32 +19,54 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _MDMP_TEST_MEMORY_H )
-#define _MDMP_TEST_MEMORY_H
+#if !defined( _MDMPTOOLS_SIGNAL_H )
+#define _MDMPTOOLS_SIGNAL_H
 
 #include <common.h>
+#include <types.h>
+
+#include "mdmptools_libcerror.h"
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-#if defined( HAVE_GNU_DL_DLSYM ) && defined( __GNUC__ ) && !defined( __clang__ )
+#if !defined( HAVE_SIGNAL_H ) && !defined( WINAPI )
+#error missing signal functions
+#endif
 
-#define HAVE_MDMP_TEST_MEMORY		1
+#if defined( WINAPI )
+typedef unsigned long mdmptools_signal_t;
 
-extern int mdmp_test_malloc_attempts_before_fail;
+#else
+typedef int mdmptools_signal_t;
 
-extern int mdmp_test_memcpy_attempts_before_fail;
+#endif /* defined( WINAPI ) */
 
-extern int mdmp_test_memset_attempts_before_fail;
+#if defined( WINAPI )
 
-extern int mdmp_test_realloc_attempts_before_fail;
+BOOL WINAPI mdmptools_signal_handler(
+             mdmptools_signal_t signal );
 
-#endif /* defined( HAVE_GNU_DL_DLSYM ) && defined( __GNUC__ ) && !defined( __clang__ ) */
+#if defined( _MSC_VER )
+
+void mdmptools_signal_initialize_memory_debug(
+      void );
+
+#endif /* defined( _MSC_VER ) */
+
+#endif /* defined( WINAPI ) */
+
+int mdmptools_signal_attach(
+     void (*signal_handler)( mdmptools_signal_t ),
+     libcerror_error_t **error );
+
+int mdmptools_signal_detach(
+     libcerror_error_t **error );
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif /* !defined( _MDMP_TEST_MEMORY_H ) */
+#endif /* !defined( _MDMPTOOLS_SIGNAL_H ) */
 

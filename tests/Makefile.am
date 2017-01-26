@@ -18,13 +18,11 @@ AM_CPPFLAGS = \
 	@LIBMDMP_DLL_IMPORT@
 
 TESTS = \
-	test_api_functions.sh \
-	test_api_types.sh \
+	test_library.sh \
 	test_mdmpinfo.sh
 
 check_SCRIPTS = \
-	test_api_functions.sh \
-	test_api_types.sh \
+	test_library.sh \
 	test_mdmpinfo.sh \
 	test_runner.sh
 

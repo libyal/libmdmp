@@ -17,7 +17,6 @@ SUBDIRS = \
 	libfdata \
 	libfdatetime \
 	libmdmp \
-	libcsystem \
 	mdmptools \
 	po \
 	manuals \
@@ -112,7 +111,6 @@ splint:
 	(cd $(srcdir)/libfdata && $(MAKE) splint $(AM_MAKEFLAGS))
 	(cd $(srcdir)/libfdatetime && $(MAKE) splint $(AM_MAKEFLAGS))
 	(cd $(srcdir)/libmdmp && $(MAKE) splint $(AM_MAKEFLAGS))
-	(cd $(srcdir)/libcsystem && $(MAKE) splint $(AM_MAKEFLAGS))
 	(cd $(srcdir)/mdmptools && $(MAKE) splint $(AM_MAKEFLAGS))
 	(cd $(srcdir)/po && $(MAKE) splint $(AM_MAKEFLAGS))
 	(cd $(srcdir)/tests && $(MAKE) splint $(AM_MAKEFLAGS))

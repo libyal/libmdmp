@@ -1,7 +1,7 @@
 /*
  * Common output functions for the mdmptools
  *
- * Copyright (C) 2014-2016, Joachim Metz <joachim.metz@gmail.com>
+ * Copyright (C) 2014-2017, Joachim Metz <joachim.metz@gmail.com>
  *
  * Refer to AUTHORS for acknowledgements.
  *
@@ -19,16 +19,22 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _MDMPOUTPUT_H )
-#define _MDMPOUTPUT_H
+#if !defined( _MDMPTOOLS_OUTPUT_H )
+#define _MDMPTOOLS_OUTPUT_H
 
 #include <common.h>
 #include <file_stream.h>
 #include <types.h>
 
+#include "mdmptools_libcerror.h"
+
 #if defined( __cplusplus )
 extern "C" {
 #endif
+
+int mdmptools_output_initialize(
+     int stdio_mode,
+     libcerror_error_t **error );
 
 void mdmpoutput_copyright_fprint(
       FILE *stream );
@@ -45,5 +51,5 @@ void mdmpoutput_version_detailed_fprint(
 }
 #endif
 
-#endif /* !defined( _MDMPOUTPUT_H ) */
+#endif /* !defined( _MDMPTOOLS_OUTPUT_H ) */
 

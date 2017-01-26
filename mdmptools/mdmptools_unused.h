@@ -1,8 +1,5 @@
 /*
- * The extern definition
- *
- * This header should be included in header files that export or import
- * library functions
+ * The unused definition
  *
  * Copyright (C) 2014-2017, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -22,23 +19,32 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _LIBMDMP_EXTERN_H )
-#define _LIBMDMP_EXTERN_H
+#if !defined( _MDMPTOOLS_UNUSED_H )
+#define _MDMPTOOLS_UNUSED_H
 
-/* To export functions from the libmdmp DLL define LIBMDMP_DLL_EXPORT
- * To import functions from the libmdmp DLL define LIBMDMP_DLL_IMPORT
- * Otherwise use default extern statement
- */
-#if defined( LIBMDMP_DLL_EXPORT )
-#define LIBMDMP_EXTERN __declspec(dllexport)
+#include <common.h>
 
-#elif defined( LIBMDMP_DLL_IMPORT )
-#define LIBMDMP_EXTERN extern __declspec(dllimport)
+#if !defined( MDMPTOOLS_ATTRIBUTE_UNUSED )
+
+#if defined( __GNUC__ ) && __GNUC__ >= 3
+#define MDMPTOOLS_ATTRIBUTE_UNUSED	__attribute__ ((__unused__))
 
 #else
-#define LIBMDMP_EXTERN extern
+#define MDMPTOOLS_ATTRIBUTE_UNUSED
 
-#endif
+#endif /* defined( __GNUC__ ) && __GNUC__ >= 3 */
 
-#endif /* !defined( _LIBMDMP_EXTERN_H ) */
+#endif /* !defined( MDMPTOOLS_ATTRIBUTE_UNUSED ) */
+
+#if defined( _MSC_VER )
+#define MDMPTOOLS_UNREFERENCED_PARAMETER( parameter ) \
+	UNREFERENCED_PARAMETER( parameter );
+
+#else
+#define MDMPTOOLS_UNREFERENCED_PARAMETER( parameter ) \
+	/* parameter */
+
+#endif /* defined( _MSC_VER ) */
+
+#endif /* !defined( _MDMPTOOLS_UNUSED_H ) */
 
