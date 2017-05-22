@@ -113,7 +113,6 @@ stamp-h[1-9]
 /common/config.h.in
 /common/types.h
 /dpkg/changelog
-/dpkg/copyright
 /include/libmdmp.h
 /include/libmdmp/definitions.h
 /include/libmdmp/features.h

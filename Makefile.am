@@ -29,11 +29,10 @@ DPKG_FILES = \
 	dpkg/compat \
 	dpkg/control \
 	dpkg/copyright \
-	dpkg/copyright.in \
 	dpkg/rules \
-	dpkg/libagdb-dev.docs \
-	dpkg/libagdb.docs \
-	dpkg/libagdb-tools.docs \
+	dpkg/libagdb-dev.install \
+	dpkg/libagdb.install \
+	dpkg/libagdb-tools.install \
 	dpkg/source/format
 
 GETTEXT_FILES = \
