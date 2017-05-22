@@ -124,8 +124,8 @@ The file flags (MINIDUMP_TYPE) are defined as:
 | 0x00000008 | MiniDumpFilterMemory | Stack and backing store memory written to the minidump file should be filtered to remove all but the pointer values necessary to reconstruct a stack trace.
 | 0x00000010 | MiniDumpScanMemory | Stack and backing store memory should be scanned for pointer references to modules in the module list. If a module is referenced by stack or backing store memory, the ModuleWriteFlags member of the MINIDUMP_CALLBACK_OUTPUT structure is set to ModuleReferencedByMemory.
 3+| _Values not supported in DbgHelp 5.1_
-| 0x00000020 | MiniDumpWithUnloadedModules | Include information from the list of modules that were recently unloaded, if this information is maintained by the operating system.
-| Windows Server 2003 and Windows XP:  The operating system does not maintain information for unloaded modules until Windows Server 2003 with SP1 and Windows XP with SP2.
+| 0x00000020 | MiniDumpWithUnloadedModules | Include information from the list of modules that were recently unloaded, if this information is maintained by the operating system. +
+Windows Server 2003 and Windows XP:  The operating system does not maintain information for unloaded modules until Windows Server 2003 with SP1 and Windows XP with SP2.
 | 0x00000040 | MiniDumpWithIndirectlyReferencedMemory | Include pages with data referenced by locals or other stack memory. This option can increase the size of the minidump file significantly.
 | 0x00000080 | MiniDumpFilterModulePaths | Filter module paths for information such as user names or important directories. This option may prevent the system from locating the image file and should be used only in special situations.
 | 0x00000100 | MiniDumpWithProcessThreadData | Include complete per-process and per-thread information from the operating system.
