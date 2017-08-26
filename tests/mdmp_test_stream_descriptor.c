@@ -35,7 +35,7 @@
 
 #include "../libmdmp/libmdmp_stream_descriptor.h"
 
-#if defined( __GNUC__ )
+#if defined( __GNUC__ ) && !defined( LIBMDMP_DLL_IMPORT )
 
 /* Tests the libmdmp_stream_descriptor_initialize function
  * Returns 1 if successful or 0 if not
@@ -270,7 +270,7 @@ on_error:
 	return( 0 );
 }
 
-#endif /* defined( __GNUC__ ) */
+#endif /* defined( __GNUC__ ) && !defined( LIBMDMP_DLL_IMPORT ) */
 
 /* The main program
  */
@@ -287,7 +287,7 @@ int main(
 	MDMP_TEST_UNREFERENCED_PARAMETER( argc )
 	MDMP_TEST_UNREFERENCED_PARAMETER( argv )
 
-#if defined( __GNUC__ )
+#if defined( __GNUC__ ) && !defined( LIBMDMP_DLL_IMPORT )
 
 	MDMP_TEST_RUN(
 	 "libmdmp_stream_descriptor_initialize",
@@ -299,7 +299,7 @@ int main(
 
 	/* TODO: add tests for libmdmp_stream_descriptor_set_data_range */
 
-#endif /* defined( __GNUC__ ) */
+#endif /* defined( __GNUC__ ) && !defined( LIBMDMP_DLL_IMPORT ) */
 
 	return( EXIT_SUCCESS );
 

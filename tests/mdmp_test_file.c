@@ -1475,11 +1475,11 @@ int main(
 		 mdmp_test_file_signal_abort,
 		 file );
 
-#if defined( __GNUC__ )
+#if defined( __GNUC__ ) && !defined( LIBMDMP_DLL_IMPORT )
 
 		/* TODO: add tests for libmdmp_file_open_read */
 
-#endif /* defined( __GNUC__ ) */
+#endif /* defined( __GNUC__ ) && !defined( LIBMDMP_DLL_IMPORT ) */
 
 		MDMP_TEST_RUN_WITH_ARGS(
 		 "libmdmp_file_get_number_of_streams",
