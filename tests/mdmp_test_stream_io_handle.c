@@ -57,9 +57,9 @@ int mdmp_test_stream_io_handle_free(
 	 result,
 	 -1 );
 
-        MDMP_TEST_ASSERT_IS_NOT_NULL(
-         "error",
-         error );
+	MDMP_TEST_ASSERT_IS_NOT_NULL(
+	 "error",
+	 error );
 
 	libcerror_error_free(
 	 &error );
