@@ -24,7 +24,7 @@ BEGIN
       VALUE "FileDescription",		"Library to access the Windows Minidump (MDMP) format\0"
       VALUE "FileVersion",		"@VERSION@" "\0"
       VALUE "InternalName",		"libmdmp.dll\0"
-      VALUE "LegalCopyright",		"(C) 2014-2017, Joachim Metz <joachim.metz@gmail.com>\0"
+      VALUE "LegalCopyright",		"(C) 2014-2018, Joachim Metz <joachim.metz@gmail.com>\0"
       VALUE "OriginalFilename",		"libmdmp.dll\0"
       VALUE "ProductName",		"libmdmp\0"
       VALUE "ProductVersion",		"@VERSION@" "\0"
