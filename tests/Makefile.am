@@ -50,17 +50,24 @@ mdmp_test_error_LDADD = \
 
 mdmp_test_file_SOURCES = \
 	mdmp_test_file.c \
+	mdmp_test_functions.c mdmp_test_functions.h \
 	mdmp_test_getopt.c mdmp_test_getopt.h \
+	mdmp_test_libbfio.h \
 	mdmp_test_libcerror.h \
 	mdmp_test_libclocale.h \
 	mdmp_test_libcnotify.h \
 	mdmp_test_libmdmp.h \
 	mdmp_test_libuna.h \
 	mdmp_test_macros.h \
-	mdmp_test_memory.c mdmp_test_memory.h
+	mdmp_test_memory.c mdmp_test_memory.h \
+	mdmp_test_unused.h
 
 mdmp_test_file_LDADD = \
+	@LIBBFIO_LIBADD@ \
+	@LIBCPATH_LIBADD@ \
+	@LIBCFILE_LIBADD@ \
 	@LIBUNA_LIBADD@ \
+	@LIBCSPLIT_LIBADD@ \
 	@LIBCNOTIFY_LIBADD@ \
 	@LIBCLOCALE_LIBADD@ \
 	@LIBCDATA_LIBADD@ \
@@ -82,13 +89,15 @@ mdmp_test_io_handle_LDADD = \
 	@LIBCERROR_LIBADD@
 
 mdmp_test_notify_SOURCES = \
+	mdmp_test_libcerror.h \
 	mdmp_test_libmdmp.h \
 	mdmp_test_macros.h \
 	mdmp_test_notify.c \
 	mdmp_test_unused.h
 
 mdmp_test_notify_LDADD = \
-	../libmdmp/libmdmp.la
+	../libmdmp/libmdmp.la \
+	@LIBCERROR_LIBADD@
 
 mdmp_test_stream_SOURCES = \
 	mdmp_test_libcerror.h \
@@ -127,6 +136,7 @@ mdmp_test_stream_io_handle_LDADD = \
 	@LIBCERROR_LIBADD@
 
 mdmp_test_support_SOURCES = \
+	mdmp_test_functions.c mdmp_test_functions.h \
 	mdmp_test_getopt.c mdmp_test_getopt.h \
 	mdmp_test_libbfio.h \
 	mdmp_test_libcerror.h \
@@ -135,7 +145,9 @@ mdmp_test_support_SOURCES = \
 	mdmp_test_libmdmp.h \
 	mdmp_test_libuna.h \
 	mdmp_test_macros.h \
-	mdmp_test_support.c
+	mdmp_test_memory.c mdmp_test_memory.h \
+	mdmp_test_support.c \
+	mdmp_test_unused.h
 
 mdmp_test_support_LDADD = \
 	@LIBBFIO_LIBADD@ \

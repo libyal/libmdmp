@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #endif
 
+#include "mdmp_test_libcerror.h"
 #include "mdmp_test_libmdmp.h"
 #include "mdmp_test_macros.h"
 #include "mdmp_test_unused.h"
@@ -51,13 +52,37 @@ int mdmp_test_notify_set_verbose(
 int mdmp_test_notify_set_stream(
      void )
 {
-	/* Test invocation of function only
+	libcerror_error_t *error = NULL;
+	int result               = 0;
+
+	/* Test regular cases
 	 */
-	libmdmp_notify_set_stream(
-	 NULL,
-	 NULL );
+	result = libmdmp_notify_set_stream(
+	          NULL,
+	          &error );
+
+	MDMP_TEST_ASSERT_EQUAL_INT(
+	 "result",
+	 result,
+	 1 );
+
+	MDMP_TEST_ASSERT_IS_NULL(
+	 "error",
+	 error );
+
+	/* Test error cases
+	 */
+/* TODO test libcnotify_stream_set failure */
 
 	return( 1 );
+
+on_error:
+	if( error != NULL )
+	{
+		libcerror_error_free(
+		 &error );
+	}
+	return( 0 );
 }
 
 /* Tests the libmdmp_notify_stream_open function
@@ -66,13 +91,65 @@ int mdmp_test_notify_set_stream(
 int mdmp_test_notify_stream_open(
      void )
 {
-	/* Test invocation of function only
+	libcerror_error_t *error = NULL;
+	int result               = 0;
+
+	/* Test regular cases
 	 */
-	libmdmp_notify_stream_open(
-	 NULL,
-	 NULL );
+	result = libmdmp_notify_stream_open(
+	          "notify_stream.log",
+	          &error );
+
+	MDMP_TEST_ASSERT_EQUAL_INT(
+	 "result",
+	 result,
+	 1 );
+
+	MDMP_TEST_ASSERT_IS_NULL(
+	 "error",
+	 error );
+
+	/* Test error cases
+	 */
+	result = libmdmp_notify_stream_open(
+	          NULL,
+	          &error );
+
+	MDMP_TEST_ASSERT_EQUAL_INT(
+	 "result",
+	 result,
+	 -1 );
+
+	MDMP_TEST_ASSERT_IS_NOT_NULL(
+	 "error",
+	 error );
+
+	libcerror_error_free(
+	 &error );
+
+	/* Clean up
+	 */
+	result = libmdmp_notify_stream_close(
+	          &error );
+
+	MDMP_TEST_ASSERT_EQUAL_INT(
+	 "result",
+	 result,
+	 0 );
+
+	MDMP_TEST_ASSERT_IS_NULL(
+	 "error",
+	 error );
 
 	return( 1 );
+
+on_error:
+	if( error != NULL )
+	{
+		libcerror_error_free(
+		 &error );
+	}
+	return( 0 );
 }
 
 /* Tests the libmdmp_notify_stream_close function
@@ -81,12 +158,36 @@ int mdmp_test_notify_stream_open(
 int mdmp_test_notify_stream_close(
      void )
 {
-	/* Test invocation of function only
+	libcerror_error_t *error = NULL;
+	int result               = 0;
+
+	/* Test regular cases
 	 */
-	libmdmp_notify_stream_close(
-	 NULL );
+	result = libmdmp_notify_stream_close(
+	          &error );
+
+	MDMP_TEST_ASSERT_EQUAL_INT(
+	 "result",
+	 result,
+	 0 );
+
+	MDMP_TEST_ASSERT_IS_NULL(
+	 "error",
+	 error );
+
+	/* Test error cases
+	 */
+/* TODO test libcnotify_stream_close failure */
 
 	return( 1 );
+
+on_error:
+	if( error != NULL )
+	{
+		libcerror_error_free(
+		 &error );
+	}
+	return( 0 );
 }
 
 /* The main program
