@@ -28,17 +28,13 @@
  */
 #if !defined( HAVE_LOCAL_LIBMDMP )
 
-/* If libtool DLL support is enabled set LIBMDMP_DLL_EXPORT
- * before including libmdmp/extern.h
- */
-#if defined( _WIN32 ) && defined( DLL_EXPORT )
-#define LIBMDMP_DLL_EXPORT
-#endif
-
 #include <libmdmp/extern.h>
 
+#define LIBMDMP_EXTERN_VARIABLE	LIBMDMP_EXTERN
+
 #else
-#define LIBMDMP_EXTERN	/* extern */
+#define LIBMDMP_EXTERN		/* extern */
+#define LIBMDMP_EXTERN_VARIABLE	extern
 
 #endif /* !defined( HAVE_LOCAL_LIBMDMP ) */
 

@@ -1,5 +1,5 @@
 /*
- * The internal libmdmp header
+ * The libmdmp header wrapper
  *
  * Copyright (C) 2014-2018, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -23,13 +23,6 @@
 #define _MDMPTOOLS_LIBMDMP_H
 
 #include <common.h>
-
-/* If Cygwin libtool DLL support is enabled set LIBMDMP_DLL_IMPORT
- * before including libmdmp.h
- */
-#if defined( _WIN32 ) && defined( DLL_IMPORT ) && !defined( HAVE_STATIC_EXECUTABLES )
-#define LIBMDMP_DLL_IMPORT
-#endif
 
 #include <libmdmp.h>
 
