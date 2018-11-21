@@ -112,7 +112,6 @@ matrix:
     env:
     - CONFIGURE_OPTIONS=""
     - TARGET="macos-gcc"
-    compiler: clang
     compiler: gcc
     os: osx
     osx_image: xcode8.3
@@ -120,7 +119,6 @@ matrix:
     env:
     - CONFIGURE_OPTIONS="--disable-dependency-tracking --prefix=/usr/local"
     - TARGET="macos-gcc-pkgbuild"
-    compiler: clang
     compiler: gcc
     os: osx
     osx_image: xcode8.3
