@@ -13,6 +13,14 @@ BuildRequires: gcc @ax_libbfio_spec_build_requires@ @ax_libcdata_spec_build_requ
 %description -n libmdmp
 Library to access the Windows Minidump (MDMP) format
 
+%package -n libmdmp-static
+Summary: Library to access the Windows Minidump (MDMP) format
+Group: Development/Libraries
+Requires: libmdmp = %{version}-%{release}
+
+%description -n libmdmp-static
+Static library version of libmdmp.
+
 %package -n libmdmp-devel
 Summary: Header files and libraries for developing applications for libmdmp
 Group: Development/Libraries
@@ -53,11 +61,16 @@ rm -rf %{buildroot}
 %doc AUTHORS README
 %attr(755,root,root) %{_libdir}/*.so.*
 
+%files -n libmdmp-static
+%defattr(644,root,root,755)
+%license COPYING
+%doc AUTHORS README
+%attr(755,root,root) %{_libdir}/*.a
+
 %files -n libmdmp-devel
 %defattr(644,root,root,755)
 %license COPYING
-%doc AUTHORS README ChangeLog
-%{_libdir}/*.a
+%doc AUTHORS README
 %{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libmdmp.pc

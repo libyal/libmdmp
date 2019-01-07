@@ -9,6 +9,8 @@ Homepage: https://github.com/libyal/libmdmp
 Package: libmdmp
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: libmdmp1
+Replaces: libmdmp1
 Suggests: libmdmp-dbg
 Description: Library to access the Windows Minidump (MDMP) format
  libmdmp is a library to access the Windows Minidump (MDMP) format.
@@ -31,6 +33,8 @@ Package: libmdmp-tools
 Section: utils
 Architecture: any
 Depends: libmdmp (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Conflicts: libmdmp-utils
+Replaces: libmdmp-utils
 Description: Several tools for reading Windows Minidump (MDMP) files
  Several tools for reading Windows Minidump (MDMP) files.
 

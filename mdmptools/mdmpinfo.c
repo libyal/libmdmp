@@ -1,7 +1,7 @@
 /*
  * Shows information obtained from a Windows Minidump (MDMP) file
  *
- * Copyright (C) 2014-2018, Joachim Metz <joachim.metz@gmail.com>
+ * Copyright (C) 2014-2019, Joachim Metz <joachim.metz@gmail.com>
  *
  * Refer to AUTHORS for acknowledgements.
  *
@@ -151,7 +151,7 @@ int main( int argc, char * const argv[] )
 
 		goto on_error;
 	}
-	mdmpoutput_version_fprint(
+	mdmptools_output_version_fprint(
 	 stdout,
 	 program );
 
@@ -186,7 +186,7 @@ int main( int argc, char * const argv[] )
 				break;
 
 			case (system_integer_t) 'V':
-				mdmpoutput_copyright_fprint(
+				mdmptools_output_copyright_fprint(
 				 stdout );
 
 				return( EXIT_SUCCESS );
