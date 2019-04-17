@@ -23,6 +23,7 @@ TESTS = \
 
 check_SCRIPTS = \
 	test_library.sh \
+	test_manpage.sh \
 	test_mdmpinfo.sh \
 	test_runner.sh
 
