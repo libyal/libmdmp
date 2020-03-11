@@ -1,7 +1,7 @@
 /*
  * Common output functions for the mdmptools
  *
- * Copyright (C) 2014-2019, Joachim Metz <joachim.metz@gmail.com>
+ * Copyright (C) 2014-2020, Joachim Metz <joachim.metz@gmail.com>
  *
  * Refer to AUTHORS for acknowledgements.
  *
@@ -36,14 +36,14 @@ int mdmptools_output_initialize(
      int stdio_mode,
      libcerror_error_t **error );
 
-void mdpmtools_output_copyright_fprint(
+void mdmptools_output_copyright_fprint(
       FILE *stream );
 
-void mdpmtools_output_version_fprint(
+void mdmptools_output_version_fprint(
       FILE *stream,
       const char *program );
 
-void mdpmtools_output_version_detailed_fprint(
+void mdmptools_output_version_detailed_fprint(
       FILE *stream,
       const char *program );
 
