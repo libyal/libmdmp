@@ -442,7 +442,8 @@ int libmdmp_io_handle_read_streams_directory(
 	streams_directory_data_size = sizeof( mdmp_streams_directory_entry_t )
 	                            * number_of_streams;
 
-	if( streams_directory_data_size > (size_t) SSIZE_MAX )
+	if( ( streams_directory_data_size == 0 )
+	 || ( streams_directory_data_size > (size_t) MEMORY_MAXIMUM_ALLOCATION_SIZE ) )
 	{
 		libcerror_error_set(
 		 error,
