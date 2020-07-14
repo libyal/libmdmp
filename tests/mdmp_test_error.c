@@ -27,7 +27,6 @@
 #include <stdlib.h>
 #endif
 
-#include "mdmp_test_libcerror.h"
 #include "mdmp_test_libmdmp.h"
 #include "mdmp_test_macros.h"
 #include "mdmp_test_unused.h"
