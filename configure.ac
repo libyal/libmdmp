@@ -2,7 +2,7 @@ AC_PREREQ( 2.59 )
 
 AC_INIT(
  [libmdmp],
- [20200714],
+ [20200715],
  [joachim.metz@gmail.com])
 
 AC_CONFIG_SRCDIR(
@@ -21,6 +21,7 @@ AC_LIBTOOL_WIN32_DLL
 dnl Checks for programs
 AC_PROG_CC
 AC_PROG_GCC_TRADITIONAL
+AC_PROG_CXX
 AC_PROG_MAKE_SET
 AC_PROG_INSTALL
 
