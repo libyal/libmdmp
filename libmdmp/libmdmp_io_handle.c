@@ -179,207 +179,6 @@ int libmdmp_io_handle_clear(
 	return( 1 );
 }
 
-/* Reads the file header
- * Returns 1 if successful or -1 on error
- */
-int libmdmp_io_handle_read_file_header(
-     libmdmp_io_handle_t *io_handle,
-     libbfio_handle_t *file_io_handle,
-     uint32_t *streams_directory_offset,
-     uint32_t *number_of_streams,
-     libcerror_error_t **error )
-{
-	mdmp_file_header_t file_header;
-
-	static char *function = "libmdmp_io_handle_read_file_header";
-	ssize_t read_count    = 0;
-
-#if defined( HAVE_DEBUG_OUTPUT )
-	uint32_t value_32bit  = 0;
-	uint16_t value_16bit  = 0;
-#endif
-
-	if( io_handle == NULL )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_ARGUMENTS,
-		 LIBCERROR_ARGUMENT_ERROR_INVALID_VALUE,
-		 "%s: invalid IO handle.",
-		 function );
-
-		return( -1 );
-	}
-	if( streams_directory_offset == NULL )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_ARGUMENTS,
-		 LIBCERROR_ARGUMENT_ERROR_INVALID_VALUE,
-		 "%s: invalid streams directory offset.",
-		 function );
-
-		return( -1 );
-	}
-	if( number_of_streams == NULL )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_ARGUMENTS,
-		 LIBCERROR_ARGUMENT_ERROR_INVALID_VALUE,
-		 "%s: invalid number of streams.",
-		 function );
-
-		return( -1 );
-	}
-#if defined( HAVE_DEBUG_OUTPUT )
-	if( libcnotify_verbose != 0 )
-	{
-		libcnotify_printf(
-		 "%s: reading file header at offset: 0 (0x00000000)\n",
-		 function );
-	}
-#endif
-	if( libbfio_handle_seek_offset(
-	     file_io_handle,
-	     0,
-	     SEEK_SET,
-	     error ) == -1 )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_IO,
-		 LIBCERROR_IO_ERROR_SEEK_FAILED,
-		 "%s: unable to seek file header offset: 0.",
-		 function );
-
-		return( -1 );
-	}
-	read_count = libbfio_handle_read_buffer(
-	              file_io_handle,
-	              (uint8_t *) &file_header,
-	              sizeof( mdmp_file_header_t ),
-	              error );
-
-	if( read_count != (ssize_t) sizeof( mdmp_file_header_t ) )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_IO,
-		 LIBCERROR_IO_ERROR_READ_FAILED,
-		 "%s: unable to read file header data.",
-		 function );
-
-		return( -1 );
-	}
-#if defined( HAVE_DEBUG_OUTPUT )
-	if( libcnotify_verbose != 0 )
-	{
-		libcnotify_printf(
-		 "%s: file header data:\n",
-		 function );
-		libcnotify_print_data(
-		 (uint8_t *) &file_header,
-		 sizeof( mdmp_file_header_t ),
-		 0 );
-	}
-#endif
-	if( memory_compare(
-	     file_header.signature,
-	     mdmp_file_signature,
-	     4 ) != 0 )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_RUNTIME,
-		 LIBCERROR_RUNTIME_ERROR_UNSUPPORTED_VALUE,
-		 "%s: invalid signature.",
-		 function );
-
-		return( -1 );
-	}
-	byte_stream_copy_to_uint16_little_endian(
-	 file_header.version,
-	 io_handle->version );
-
-	byte_stream_copy_to_uint32_little_endian(
-	 file_header.number_of_streams,
-	 *number_of_streams );
-
-	byte_stream_copy_to_uint32_little_endian(
-	 file_header.streams_directory_rva,
-	 *streams_directory_offset );
-
-#if defined( HAVE_DEBUG_OUTPUT )
-	if( libcnotify_verbose != 0 )
-	{
-		libcnotify_printf(
-		 "%s: signature\t\t\t\t: %c%c%c%c\n",
-		 function,
-		 file_header.signature[ 0 ],
-		 file_header.signature[ 1 ],
-		 file_header.signature[ 2 ],
-		 file_header.signature[ 3 ] );
-
-		libcnotify_printf(
-		 "%s: version\t\t\t\t: 0x%04" PRIx16 "\n",
-		 function,
-		 io_handle->version );
-
-		byte_stream_copy_to_uint16_little_endian(
-		 file_header.implementation_version,
-		 value_16bit );
-		libcnotify_printf(
-		 "%s: implementation version\t\t: 0x%04" PRIx16 "\n",
-		 function,
-		 value_16bit );
-
-		libcnotify_printf(
-		 "%s: number of streams\t\t\t: 0x%08" PRIx32 "\n",
-		 function,
-		 *number_of_streams );
-
-		libcnotify_printf(
-		 "%s: streams directory RVA\t\t: 0x%08" PRIx32 "\n",
-		 function,
-		 *streams_directory_offset );
-
-		byte_stream_copy_to_uint32_little_endian(
-		 file_header.checksum,
-		 value_32bit );
-		libcnotify_printf(
-		 "%s: checksum\t\t\t\t: 0x%08" PRIx32 "\n",
-		 function,
-		 value_32bit );
-
-/* TODO print date time value */
-		byte_stream_copy_to_uint32_little_endian(
-		 file_header.timestamp,
-		 value_32bit );
-		libcnotify_printf(
-		 "%s: timestamp\t\t\t\t: 0x%08" PRIx32 "\n",
-		 function,
-		 value_32bit );
-
-		byte_stream_copy_to_uint32_little_endian(
-		 file_header.file_flags,
-		 value_32bit );
-		libcnotify_printf(
-		 "%s: file flags\t\t\t\t: 0x%08" PRIx32 "\n",
-		 function,
-		 value_32bit );
-		libmdmp_debug_print_file_flags(
-		 value_32bit );
-		libcnotify_printf(
-		 "\n" );
-
-		libcnotify_printf(
-		 "\n" );
-	}
-#endif
-	return( 1 );
-}
-
 /* Reads the streams directory
  * Returns 1 if successful or -1 on error
  */
@@ -414,6 +213,18 @@ int libmdmp_io_handle_read_streams_directory(
 
 		return( -1 );
 	}
+	if( ( number_of_streams == 0 )
+	 || ( number_of_streams > (size_t) ( MEMORY_MAXIMUM_ALLOCATION_SIZE / sizeof( mdmp_streams_directory_entry_t ) ) ) )
+	{
+		libcerror_error_set(
+		 error,
+		 LIBCERROR_ERROR_DOMAIN_ARGUMENTS,
+		 LIBCERROR_ARGUMENT_ERROR_VALUE_OUT_OF_BOUNDS,
+		 "%s: invalid number of streams value out of bounds.",
+		 function );
+
+		goto on_error;
+	}
 #if defined( HAVE_DEBUG_OUTPUT )
 	if( libcnotify_verbose != 0 )
 	{
@@ -439,21 +250,8 @@ int libmdmp_io_handle_read_streams_directory(
 
 		goto on_error;
 	}
-	streams_directory_data_size = sizeof( mdmp_streams_directory_entry_t )
-	                            * number_of_streams;
+	streams_directory_data_size = sizeof( mdmp_streams_directory_entry_t ) * number_of_streams;
 
-	if( ( streams_directory_data_size == 0 )
-	 || ( streams_directory_data_size > (size_t) MEMORY_MAXIMUM_ALLOCATION_SIZE ) )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_RUNTIME,
-		 LIBCERROR_RUNTIME_ERROR_VALUE_OUT_OF_BOUNDS,
-		 "%s: invalid streams directory data size value out of bounds.",
-		 function );
-
-		goto on_error;
-	}
 	streams_directory_data = (uint8_t *) memory_allocate(
 	                                      sizeof( uint8_t ) * streams_directory_data_size );
 

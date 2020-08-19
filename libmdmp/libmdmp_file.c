@@ -30,6 +30,7 @@
 #include "libmdmp_definitions.h"
 #include "libmdmp_io_handle.h"
 #include "libmdmp_file.h"
+#include "libmdmp_file_header.h"
 #include "libmdmp_libbfio.h"
 #include "libmdmp_libcdata.h"
 #include "libmdmp_libcerror.h"
@@ -793,6 +794,19 @@ int libmdmp_file_close(
 
 		result = -1;
 	}
+	if( libmdmp_file_header_free(
+	     &( internal_file->file_header ),
+	     error ) != 1 )
+	{
+		libcerror_error_set(
+		 error,
+		 LIBCERROR_ERROR_DOMAIN_RUNTIME,
+		 LIBCERROR_RUNTIME_ERROR_FINALIZE_FAILED,
+		 "%s: unable to free file header.",
+		 function );
+
+		result = -1;
+	}
 	if( libcdata_array_resize(
 	     internal_file->streams_array,
 	     0,
@@ -819,9 +833,7 @@ int libmdmp_file_open_read(
      libbfio_handle_t *file_io_handle,
      libcerror_error_t **error )
 {
-	static char *function             = "libmdmp_file_open_read";
-	uint32_t number_of_streams        = 0;
-	uint32_t streams_directory_offset = 0;
+	static char *function = "libmdmp_file_open_read";
 
 	if( internal_file == NULL )
 	{
@@ -845,6 +857,17 @@ int libmdmp_file_open_read(
 
 		return( -1 );
 	}
+	if( internal_file->file_header != NULL )
+	{
+		libcerror_error_set(
+		 error,
+		 LIBCERROR_ERROR_DOMAIN_RUNTIME,
+		 LIBCERROR_RUNTIME_ERROR_VALUE_ALREADY_SET,
+		 "%s: invalid file - file header value already set.",
+		 function );
+
+		return( -1 );
+	}
 	if( internal_file->io_handle->abort != 0 )
 	{
 		internal_file->io_handle->abort = 0;
@@ -856,11 +879,22 @@ int libmdmp_file_open_read(
 		 "Reading file header:\n" );
 	}
 #endif
-	if( libmdmp_io_handle_read_file_header(
-	     internal_file->io_handle,
+	if( libmdmp_file_header_initialize(
+	     &( internal_file->file_header ),
+	     error ) != 1 )
+	{
+		libcerror_error_set(
+		 error,
+		 LIBCERROR_ERROR_DOMAIN_RUNTIME,
+		 LIBCERROR_RUNTIME_ERROR_INITIALIZE_FAILED,
+		 "%s: unable to create file header.",
+		 function );
+
+		goto on_error;
+	}
+	if( libmdmp_file_header_read_file_io_handle(
+	     internal_file->file_header,
 	     file_io_handle,
-	     &streams_directory_offset,
-	     &number_of_streams,
 	     error ) != 1 )
 	{
 		libcerror_error_set(
@@ -872,6 +906,8 @@ int libmdmp_file_open_read(
 
 		goto on_error;
 	}
+	internal_file->io_handle->version = internal_file->file_header->version;
+
 #if defined( HAVE_DEBUG_OUTPUT )
 	if( libcnotify_verbose != 0 )
 	{
@@ -882,8 +918,8 @@ int libmdmp_file_open_read(
 	if( libmdmp_io_handle_read_streams_directory(
 	     internal_file->io_handle,
 	     file_io_handle,
-	     streams_directory_offset,
-	     number_of_streams,
+	     internal_file->file_header->streams_directory_offset,
+	     internal_file->file_header->number_of_streams,
 	     internal_file->streams_array,
 	     error ) != 1 )
 	{
@@ -900,7 +936,12 @@ int libmdmp_file_open_read(
 	return( 1 );
 
 on_error:
-/* TODO */
+	if( internal_file->file_header != NULL )
+	{
+		libmdmp_file_header_free(
+		 &( internal_file->file_header ),
+		 NULL );
+	}
 	return( -1 );
 }
 

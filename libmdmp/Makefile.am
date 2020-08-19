@@ -27,6 +27,7 @@ libmdmp_la_SOURCES = \
 	libmdmp_error.c libmdmp_error.h \
 	libmdmp_extern.h \
 	libmdmp_file.c libmdmp_file.h \
+	libmdmp_file_header.c libmdmp_file_header.h \
 	libmdmp_io_handle.c libmdmp_io_handle.h \
 	libmdmp_libbfio.h \
 	libmdmp_libcdata.h \

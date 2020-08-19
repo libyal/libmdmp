@@ -26,6 +26,7 @@
 #include <types.h>
 
 #include "libmdmp_extern.h"
+#include "libmdmp_file_header.h"
 #include "libmdmp_io_handle.h"
 #include "libmdmp_libbfio.h"
 #include "libmdmp_libcdata.h"
@@ -55,6 +56,10 @@ struct libmdmp_internal_file
 	/* Value to indicate if the file IO handle was opened inside the library
 	 */
 	uint8_t file_io_handle_opened_in_library;
+
+	/* The file header
+	 */
+	libmdmp_file_header_t *file_header;
 
 	/* The streams array
 	 */

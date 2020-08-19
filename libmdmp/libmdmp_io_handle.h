@@ -60,13 +60,6 @@ int libmdmp_io_handle_clear(
      libmdmp_io_handle_t *io_handle,
      libcerror_error_t **error );
 
-int libmdmp_io_handle_read_file_header(
-     libmdmp_io_handle_t *io_handle,
-     libbfio_handle_t *file_io_handle,
-     uint32_t *streams_directory_offset,
-     uint32_t *number_of_streams,
-     libcerror_error_t **error );
-
 int libmdmp_io_handle_read_streams_directory(
      libmdmp_io_handle_t *io_handle,
      libbfio_handle_t *file_io_handle,
