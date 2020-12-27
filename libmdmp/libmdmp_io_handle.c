@@ -225,31 +225,6 @@ int libmdmp_io_handle_read_streams_directory(
 
 		goto on_error;
 	}
-#if defined( HAVE_DEBUG_OUTPUT )
-	if( libcnotify_verbose != 0 )
-	{
-		libcnotify_printf(
-		 "%s: reading streams directory at offset: %" PRIu32 " (0x%08" PRIx32 ")\n",
-		 function,
-		 streams_directory_offset,
-		 streams_directory_offset );
-	}
-#endif
-	if( libbfio_handle_seek_offset(
-	     file_io_handle,
-	     streams_directory_offset,
-	     SEEK_SET,
-	     error ) == -1 )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_IO,
-		 LIBCERROR_IO_ERROR_SEEK_FAILED,
-		 "%s: unable to seek streams directory offset: %" PRIu32 " (0x%08" PRIx32 ").",
-		 function );
-
-		goto on_error;
-	}
 	streams_directory_data_size = sizeof( mdmp_streams_directory_entry_t ) * number_of_streams;
 
 	streams_directory_data = (uint8_t *) memory_allocate(
@@ -266,10 +241,21 @@ int libmdmp_io_handle_read_streams_directory(
 
 		goto on_error;
 	}
-	read_count = libbfio_handle_read_buffer(
+#if defined( HAVE_DEBUG_OUTPUT )
+	if( libcnotify_verbose != 0 )
+	{
+		libcnotify_printf(
+		 "%s: reading streams directory at offset: %" PRIu32 " (0x%08" PRIx32 ")\n",
+		 function,
+		 streams_directory_offset,
+		 streams_directory_offset );
+	}
+#endif
+	read_count = libbfio_handle_read_buffer_at_offset(
 	              file_io_handle,
 	              streams_directory_data,
 	              streams_directory_data_size,
+	              streams_directory_offset,
 	              error );
 
 	if( read_count != (ssize_t) streams_directory_data_size )
@@ -278,8 +264,10 @@ int libmdmp_io_handle_read_streams_directory(
 		 error,
 		 LIBCERROR_ERROR_DOMAIN_IO,
 		 LIBCERROR_IO_ERROR_READ_FAILED,
-		 "%s: unable to read streams directory data.",
-		 function );
+		 "%s: unable to read streams directory data at offset: %" PRIu32 " (0x%08" PRIx32 ").",
+		 function,
+		 streams_directory_offset,
+		 streams_directory_offset );
 
 		goto on_error;
 	}
