@@ -1,3 +1,5 @@
+AUTOMAKE_OPTIONS = subdir-objects
+
 AM_CPPFLAGS = \
 	-I$(top_srcdir)/include \
 	-I$(top_srcdir)/common \
@@ -19,13 +21,15 @@ AM_CPPFLAGS = \
 
 TESTS = \
 	test_library.sh \
+	test_tools.sh \
 	test_mdmpinfo.sh
 
 check_SCRIPTS = \
 	test_library.sh \
 	test_manpage.sh \
 	test_mdmpinfo.sh \
-	test_runner.sh
+	test_runner.sh \
+	test_tools.sh
 
 EXTRA_DIST = \
 	$(check_SCRIPTS)
@@ -38,7 +42,10 @@ check_PROGRAMS = \
 	mdmp_test_stream \
 	mdmp_test_stream_descriptor \
 	mdmp_test_stream_io_handle \
-	mdmp_test_support
+	mdmp_test_support \
+	mdmp_test_tools_info_handle \
+	mdmp_test_tools_output \
+	mdmp_test_tools_signal
 
 mdmp_test_error_SOURCES = \
 	mdmp_test_error.c \
@@ -159,6 +166,42 @@ mdmp_test_support_LDADD = \
 	@LIBCNOTIFY_LIBADD@ \
 	@LIBCLOCALE_LIBADD@ \
 	@LIBCDATA_LIBADD@ \
+	../libmdmp/libmdmp.la \
+	@LIBCERROR_LIBADD@
+
+mdmp_test_tools_info_handle_SOURCES = \
+	../mdmptools/info_handle.c ../mdmptools/info_handle.h \
+	../mdmptools/mdmpinput.c ../mdmptools/mdmpinput.h \
+	mdmp_test_libcerror.h \
+	mdmp_test_macros.h \
+	mdmp_test_memory.c mdmp_test_memory.h \
+	mdmp_test_tools_info_handle.c \
+	mdmp_test_unused.h
+
+mdmp_test_tools_info_handle_LDADD = \
+	@LIBCLOCALE_LIBADD@ \
+	../libmdmp/libmdmp.la \
+	@LIBCERROR_LIBADD@
+
+mdmp_test_tools_output_SOURCES = \
+	../mdmptools/mdmptools_output.c ../mdmptools/mdmptools_output.h \
+	mdmp_test_libcerror.h \
+	mdmp_test_macros.h \
+	mdmp_test_tools_output.c \
+	mdmp_test_unused.h
+
+mdmp_test_tools_output_LDADD = \
+	../libmdmp/libmdmp.la \
+	@LIBCERROR_LIBADD@
+
+mdmp_test_tools_signal_SOURCES = \
+	../mdmptools/mdmptools_signal.c ../mdmptools/mdmptools_signal.h \
+	mdmp_test_libcerror.h \
+	mdmp_test_macros.h \
+	mdmp_test_tools_signal.c \
+	mdmp_test_unused.h
+
+mdmp_test_tools_signal_LDADD = \
 	../libmdmp/libmdmp.la \
 	@LIBCERROR_LIBADD@
 

@@ -21,6 +21,9 @@ MSVSCPP_FILES = \
 	mdmp_test_stream_descriptor/mdmp_test_stream_descriptor.vcproj \
 	mdmp_test_stream_io_handle/mdmp_test_stream_io_handle.vcproj \
 	mdmp_test_support/mdmp_test_support.vcproj \
+	mdmp_test_tools_info_handle/mdmp_test_tools_info_handle.vcproj \
+	mdmp_test_tools_output/mdmp_test_tools_output.vcproj \
+	mdmp_test_tools_signal/mdmp_test_tools_signal.vcproj \
 	mdmpinfo/mdmpinfo.vcproj \
 	libmdmp.sln
 
