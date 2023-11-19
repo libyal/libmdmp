@@ -7,33 +7,11 @@ TODO:
 * add python bindings
 * update manuals
 
-20160126
-* worked on tests
-* applied updates
-
-20160107
-* 2016 update
-
-20150708
-* worked on check signature
-
-20150105
-* 2015 update
-
-20141226
-* code clean up
-* added dpkg files
-
-20141201
-* code clean up
-
-20141123
-* code clean up
-
 20141026
 * changes for deployment
 * removed README.macosx
 * changes for project site move
+* see `git log' for more recent change log
 
 20140726
 * updated dependencies

@@ -19,9 +19,9 @@ MAINTAINERCLEANFILES = \
 	Makefile.in
 
 distclean: clean
-	/bin/rm -f libmdmp.h
-	/bin/rm -f libmdmp/definitions.h
-	/bin/rm -f libmdmp/features.h
-	/bin/rm -f libmdmp/types.h
-	/bin/rm -f Makefile
+	-rm -f libmdmp.h
+	-rm -f libmdmp/definitions.h
+	-rm -f libmdmp/features.h
+	-rm -f libmdmp/types.h
+	-rm -f Makefile
 

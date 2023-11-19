@@ -73,11 +73,13 @@ MAINTAINERCLEANFILES = \
 	Makefile.in
 
 distclean: clean
-	/bin/rm -f libmdmp_definitions.h
-	/bin/rm -f libmdmp.rc
-	/bin/rm -f Makefile
+	-rm -f libmdmp_definitions.h
+	-rm -f libmdmp.rc
+	-rm -f Makefile
 
-splint:
+sources-local: $(BUILT_SOURCES)
+
+splint-local:
 	@echo "Running splint on libmdmp ..."
 	-splint -preproc -redef $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(libmdmp_la_SOURCES)
 

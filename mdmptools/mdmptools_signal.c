@@ -40,7 +40,7 @@ void (*mdmptools_signal_signal_handler)( mdmptools_signal_t ) = NULL;
 /* Signal handler for Ctrl+C or Ctrl+Break signals
  */
 BOOL WINAPI mdmptools_signal_handler(
-             unsigned long signal )
+             mdmptools_signal_t signal )
 {
 	static char *function = "mdmptools_signal_handler";
 
@@ -112,7 +112,7 @@ int mdmptools_signal_attach(
 	mdmptools_signal_signal_handler = signal_handler;
 
 	if( SetConsoleCtrlHandler(
-	     mdmptools_signal_handler,
+	     (PHANDLER_ROUTINE) mdmptools_signal_handler,
 	     TRUE ) == 0 )
 	{
 		libcerror_error_set(
@@ -179,7 +179,7 @@ int mdmptools_signal_detach(
 	static char *function = "mdmptools_signal_detach";
 
 	if( SetConsoleCtrlHandler(
-	     mdmptools_signal_handler,
+	     (PHANDLER_ROUTINE) mdmptools_signal_handler,
 	     FALSE ) == 0 )
 	{
 		libcerror_error_set(
