@@ -15,13 +15,11 @@ EXTRA_DIST = \
 	libmdmp/features.h.in \
 	libmdmp/types.h.in
 
-MAINTAINERCLEANFILES = \
+DISTCLEANFILES = \
+	libmdmp.h \
+	libmdmp/definitions.h \
+	libmdmp/features.h \
+	libmdmp/types.h \
+	Makefile \
 	Makefile.in
-
-distclean: clean
-	-rm -f libmdmp.h
-	-rm -f libmdmp/definitions.h
-	-rm -f libmdmp/features.h
-	-rm -f libmdmp/types.h
-	-rm -f Makefile
 

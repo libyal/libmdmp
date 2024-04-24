@@ -31,9 +31,9 @@ DPKG_FILES = \
 	dpkg/control \
 	dpkg/copyright \
 	dpkg/rules \
-	dpkg/libagdb-dev.install \
-	dpkg/libagdb.install \
-	dpkg/libagdb-tools.install \
+	dpkg/libmdmp-dev.install \
+	dpkg/libmdmp.install \
+	dpkg/libmdmp-tools.install \
 	dpkg/source/format
 
 GETTEXT_FILES = \
@@ -53,8 +53,15 @@ EXTRA_DIST = \
 	$(PKGCONFIG_FILES) \
 	$(SPEC_FILES)
 
-MAINTAINERCLEANFILES = \
-	Makefile.in
+DISTCLEANFILES = \
+	config.status \
+	config.cache \
+	config.log \
+	libmdmp.pc \
+	libmdmp.spec \
+	Makefile \
+	Makefile.in \
+	po/Makevars
 
 pkgconfigdir = $(libdir)/pkgconfig
 
@@ -83,16 +90,4 @@ library:
 	(cd $(srcdir)/libfdatetime && $(MAKE) $(AM_MAKEFLAGS))
 	(cd $(srcdir)/libmdmp && $(MAKE) $(AM_MAKEFLAGS))
 	(cd $(srcdir)/po && $(MAKE) $(AM_MAKEFLAGS))
-
-distclean: clean
-	-rm -f Makefile
-	-rm -f config.status
-	-rm -f config.cache
-	-rm -f config.log
-	-rm -f libmdmp.pc
-	-rm -f libmdmp.spec
-	@for dir in ${subdirs}; do \
-		(cd $$dir && $(MAKE) distclean) \
-		|| case "$(MFLAGS)" in *k*) fail=yes;; *) exit 1;; esac; \
-	done && test -z "$$fail"
 

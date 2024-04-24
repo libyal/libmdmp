@@ -6,7 +6,7 @@ $ExitSuccess = 0
 $ExitFailure = 1
 $ExitIgnore = 77
 
-$LibraryTests = "error io_handle notify stream stream_descriptor stream_io_handle"
+$LibraryTests = "error file_header io_handle notify stream stream_descriptor stream_io_handle"
 $LibraryTestsWithInput = "file support"
 $OptionSets = ""
 

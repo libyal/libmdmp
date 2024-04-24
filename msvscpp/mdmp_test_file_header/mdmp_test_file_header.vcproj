@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="mdmp_test_tools_info_handle"
-	ProjectGUID="{AAF1F8D5-3C46-44A1-A17D-FE95DF8FB91B}"
-	RootNamespace="mdmp_test_tools_info_handle"
+	Name="mdmp_test_file_header"
+	ProjectGUID="{F8071569-D6D3-48CD-8D8A-0CE19944E33A}"
+	RootNamespace="mdmp_test_file_header"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -176,15 +176,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\mdmptools\info_handle.c"
+				RelativePath="..\..\tests\mdmp_test_file_header.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\tests\mdmp_test_functions.c"
 				>
 			</File>
 			<File
 				RelativePath="..\..\tests\mdmp_test_memory.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\tests\mdmp_test_tools_info_handle.c"
 				>
 			</File>
 		</Filter>
@@ -194,11 +194,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\mdmptools\info_handle.h"
+				RelativePath="..\..\tests\mdmp_test_functions.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\tests\mdmp_test_libbfio.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\tests\mdmp_test_libcerror.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\tests\mdmp_test_libmdmp.h"
 				>
 			</File>
 			<File

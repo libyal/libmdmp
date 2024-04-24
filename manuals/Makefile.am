@@ -6,9 +6,7 @@ EXTRA_DIST = \
 	mdmpinfo.1 \
 	libmdmp.3
 
-MAINTAINERCLEANFILES = \
+DISTCLEANFILES = \
+	Makefile \
 	Makefile.in
-
-distclean: clean
-	-rm -f Makefile
 

@@ -1,8 +1,8 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/include \
-	-I$(top_srcdir)/common \
+	-I../include -I$(top_srcdir)/include \
+	-I../common -I$(top_srcdir)/common \
 	@LIBCERROR_CPPFLAGS@ \
 	@LIBCTHREADS_CPPFLAGS@ \
 	@LIBCDATA_CPPFLAGS@ \
@@ -37,6 +37,7 @@ EXTRA_DIST = \
 check_PROGRAMS = \
 	mdmp_test_error \
 	mdmp_test_file \
+	mdmp_test_file_header \
 	mdmp_test_io_handle \
 	mdmp_test_notify \
 	mdmp_test_stream \
@@ -83,6 +84,28 @@ mdmp_test_file_LDADD = \
 	@LIBCTHREADS_LIBADD@ \
 	@LIBCERROR_LIBADD@ \
 	@PTHREAD_LIBADD@
+
+mdmp_test_file_header_SOURCES = \
+	mdmp_test_file_header.c \
+	mdmp_test_functions.c mdmp_test_functions.h \
+	mdmp_test_libbfio.h \
+	mdmp_test_libcerror.h \
+	mdmp_test_libmdmp.h \
+	mdmp_test_macros.h \
+	mdmp_test_memory.c mdmp_test_memory.h \
+	mdmp_test_unused.h
+
+mdmp_test_file_header_LDADD = \
+	@LIBBFIO_LIBADD@ \
+	@LIBCPATH_LIBADD@ \
+	@LIBCFILE_LIBADD@ \
+	@LIBUNA_LIBADD@ \
+	@LIBCSPLIT_LIBADD@ \
+	@LIBCNOTIFY_LIBADD@ \
+	@LIBCLOCALE_LIBADD@ \
+	@LIBCDATA_LIBADD@ \
+	../libmdmp/libmdmp.la \
+	@LIBCERROR_LIBADD@
 
 mdmp_test_io_handle_SOURCES = \
 	mdmp_test_io_handle.c \
@@ -205,9 +228,8 @@ mdmp_test_tools_signal_LDADD = \
 	../libmdmp/libmdmp.la \
 	@LIBCERROR_LIBADD@
 
-MAINTAINERCLEANFILES = \
-	Makefile.in
-
-distclean: clean
-	-rm -f Makefile
+DISTCLEANFILES = \
+	Makefile \
+	Makefile.in \
+	notify_stream.log
 

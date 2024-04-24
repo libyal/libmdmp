@@ -15,6 +15,7 @@ MSVSCPP_FILES = \
 	libuna/libuna.vcproj \
 	mdmp_test_error/mdmp_test_error.vcproj \
 	mdmp_test_file/mdmp_test_file.vcproj \
+	mdmp_test_file_header/mdmp_test_file_header.vcproj \
 	mdmp_test_io_handle/mdmp_test_io_handle.vcproj \
 	mdmp_test_notify/mdmp_test_notify.vcproj \
 	mdmp_test_stream/mdmp_test_stream.vcproj \
@@ -30,9 +31,7 @@ MSVSCPP_FILES = \
 EXTRA_DIST = \
 	$(MSVSCPP_FILES)
 
-MAINTAINERCLEANFILES = \
+DISTCLEANFILES = \
+	Makefile \
 	Makefile.in
-
-distclean: clean
-	-rm -f Makefile
 
