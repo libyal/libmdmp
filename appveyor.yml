@@ -127,9 +127,9 @@ install:
     git clone https://github.com/libyal/vstools.git ..\vstools )
 - ps: If (($env:BUILD_ENVIRONMENT -eq "msbuild") -And (Test-Path ".\synctestdata.ps1")) {
     .\synctestdata.ps1 }
-- sh: if ( test ${BUILD_ENVIRONMENT} = "python-tox" || test ${BUILD_ENVIRONMENT} = "xcode" ) && test -f "./synctestdata.sh"; then ./synctestdata.sh; fi
-- sh: if ( test `uname -s` = "Darwin" && test ${BUILD_ENVIRONMENT} = "python-tox" ) || test ${BUILD_ENVIRONMENT} = "xcode"; then brew untap homebrew/homebrew-cask-versions && brew update -q; fi
-- sh: if ( test `uname -s` = "Darwin" && test ${BUILD_ENVIRONMENT} = "python-tox" ) || test ${BUILD_ENVIRONMENT} = "xcode"; then brew install -q autoconf automake gettext gnu-sed libtool pkg-config || true; fi
+- sh: if ( test ${BUILD_ENVIRONMENT} = "xcode" ) && test -f "./synctestdata.sh"; then ./synctestdata.sh; fi
+- sh: if test ${BUILD_ENVIRONMENT} = "xcode"; then brew untap homebrew/homebrew-cask-versions && brew update -q; fi
+- sh: if test ${BUILD_ENVIRONMENT} = "xcode"; then brew install -q autoconf automake gettext gnu-sed libtool pkg-config || true; fi
 - ps: If ($env:BUILD_ENVIRONMENT -eq "cygwin64") {
     (New-Object Net.WebClient).DownloadFile("https://cygwin.com/setup-x86_64.exe", "C:\\cygwin64\\setup-x86_64.exe") }
 - cmd: if [%BUILD_ENVIRONMENT%]==[cygwin64] (
@@ -140,7 +140,7 @@ install:
     $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://uploader.codecov.io/latest/windows/codecov.exe -Outfile ..\codecov.exe }
 
 build_script:
-- ps: If ($env:BUILD_ENVIRONMENT -eq "msbuild" -or ($env:BUILD_ENVIRONMENT -eq "python-tox" -and $isWindows)) {
+- ps: If ($env:BUILD_ENVIRONMENT -eq "msbuild") {
     .\synclibs.ps1;
     .\autogen.ps1 }
 - ps: If ($env:TARGET -eq "vs2008") {
