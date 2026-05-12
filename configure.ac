@@ -2,7 +2,7 @@ AC_PREREQ([2.71])
 
 AC_INIT(
   [libmdmp],
-  [20260507],
+  [20260511],
   [joachim.metz@gmail.com])
 
 AC_CONFIG_SRCDIR(
