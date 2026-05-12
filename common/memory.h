@@ -111,7 +111,7 @@ extern "C" {
  */
 #if defined( HAVE_MEMCPY ) || defined( WINAPI )
 #define memory_copy( destination, source, count ) \
-	memcpy( (void *) destination, (void *) source, count )
+	( ( (count) <= MEMORY_MAXIMUM_ALLOCATION_SIZE ) ? memcpy( (void *) destination, (void *) source, count ) : NULL )
 #endif
 
 /* Memory set
