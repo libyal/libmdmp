@@ -3,8 +3,8 @@
 #
 # Version: 20251217
 
-REPOSITORY="log2timeline/plaso";
-TEST_DATA_PATH="test_data";
+REPOSITORY="dfirlabs/greendale-specimens";
+TEST_DATA_PATH="mdmp/student-pc1";
 TEST_SET="public";
 TEST_INPUT_DIRECTORY="tests/input";
 TEST_FILES="WER1090.tmp.mdmp";

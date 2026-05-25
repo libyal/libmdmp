@@ -31,14 +31,17 @@
  */
 #if defined( LIBMDMP_DLL_EXPORT )
 #define LIBMDMP_EXTERN __declspec(dllexport)
+#define LIBMDMP_EXTERN_VARIABLE extern __declspec(dllexport)
 
 #elif defined( LIBMDMP_DLL_IMPORT )
-#define LIBMDMP_EXTERN extern __declspec(dllimport)
+#define LIBMDMP_EXTERN __declspec(dllimport)
+#define LIBMDMP_EXTERN_VARIABLE extern __declspec(dllimport)
 
 #else
 #define LIBMDMP_EXTERN extern
+#define LIBMDMP_EXTERN_VARIABLE extern
 
-#endif
+#endif /* defined( LIBMDMP_DLL_EXPORT ) */
 
 #endif /* !defined( _LIBMDMP_EXTERN_H ) */
 

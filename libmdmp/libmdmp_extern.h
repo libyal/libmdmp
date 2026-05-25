@@ -30,12 +30,6 @@
 
 #include <libmdmp/extern.h>
 
-#if defined( __CYGWIN__ ) || defined( __MINGW32__ )
-#define LIBMDMP_EXTERN_VARIABLE	extern
-#else
-#define LIBMDMP_EXTERN_VARIABLE	LIBMDMP_EXTERN
-#endif
-
 #else
 #define LIBMDMP_EXTERN		/* extern */
 #define LIBMDMP_EXTERN_VARIABLE	extern

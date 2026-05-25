@@ -2,8 +2,8 @@
 #
 # Version: 20251217
 
-$Repository = "log2timeline/plaso"
-$TestDataPath = "test_data"
+$Repository = "dfirlabs/greendale-specimens"
+$TestDataPath = "mdmp/student-pc1"
 $TestSet = "public"
 $TestInputDirectory = "tests/input"
 $TestFiles = "WER1090.tmp.mdmp"

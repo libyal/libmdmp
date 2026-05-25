@@ -6,29 +6,32 @@ on:
 permissions: read-all
 jobs:
   build_ossfuzz:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         include:
-        - architecture: 'x64'
+        - os: ubuntu-24.04
           compiler: 'gcc'
           configure_options: ''
     steps:
     - name: Install build dependencies
       run: |
-        sudo apt-get -y install git
+        sudo apt -y install git
     - uses: actions/checkout@v6
       with:
         repository: google/oss-fuzz
         path: oss-fuzz
     - name: Build OSSFuzz fuzz targets
+      env:
+        BRANCH: ${{ github.head_ref || github.ref_name }}
+        ORGANIZATION: ${{ github.event.pull_request.head.repo.owner.login }}
       working-directory: oss-fuzz
       run: |
         mkdir -p projects/libmdmp
         cp projects/libyal/build.sh projects/libmdmp/
         cp projects/libyal/project.yaml projects/libmdmp/
         head -n 20 projects/libyal/Dockerfile > projects/libmdmp/Dockerfile
-        echo "RUN git clone --depth 1 https://github.com/libyal/libmdmp.git libmdmp" >> projects/libmdmp/Dockerfile
+        echo "RUN git clone --depth 1 https://github.com/${ORGANIZATION:-libyal}/libmdmp.git -b ${BRANCH:-main} libmdmp" >> projects/libmdmp/Dockerfile
         tail -n 3 projects/libyal/Dockerfile >> projects/libmdmp/Dockerfile
         python3 infra/helper.py build_image --pull libmdmp
         python3 infra/helper.py build_fuzzers --sanitizer address libmdmp
