@@ -1,11 +1,11 @@
 # Script that synchronizes the local test data
 #
-# Version: 20251217
+# Version: 20260531
 
 $Repository = "dfirlabs/greendale-specimens"
 $TestDataPath = "mdmp/student-pc1"
 $TestSet = "public"
-$TestInputDirectory = "tests/input"
+$TestInputDirectory = "tests\input"
 $TestFiles = "WER1090.tmp.mdmp"
 
 If (-Not (Test-Path ${TestInputDirectory}))

@@ -19,6 +19,9 @@ AM_CPPFLAGS = \
 	@PTHREAD_CPPFLAGS@ \
 	@LIBMDMP_DLL_IMPORT@
 
+AM_TESTS_ENVIRONMENT = \
+	export TESTS_USE_WINAPI="@TESTS_USE_WINAPI@";
+
 TESTS = \
 	test_library.sh \
 	test_tools.sh \
@@ -215,7 +218,8 @@ mdmp_test_tools_output_SOURCES = \
 
 mdmp_test_tools_output_LDADD = \
 	../libmdmp/libmdmp.la \
-	@LIBCERROR_LIBADD@
+	@LIBCERROR_LIBADD@ \
+	@LIBINTL@
 
 mdmp_test_tools_signal_SOURCES = \
 	../mdmptools/mdmptools_signal.c ../mdmptools/mdmptools_signal.h \
