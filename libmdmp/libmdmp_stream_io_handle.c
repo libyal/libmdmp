@@ -118,7 +118,7 @@ on_error:
 }
 
 /* Frees a stream IO handle
- * Returns 1 if succesful or -1 on error
+ * Returns 1 if successful or -1 on error
  */
 int libmdmp_stream_io_handle_free(
      libmdmp_stream_io_handle_t **io_handle,
@@ -150,7 +150,7 @@ int libmdmp_stream_io_handle_free(
 }
 
 /* Clones (duplicates) the IO handle and its attributes
- * Returns 1 if succesful or -1 on error
+ * Returns 1 if successful or -1 on error
  */
 int libmdmp_stream_io_handle_clone(
      libmdmp_stream_io_handle_t **destination_io_handle,
