@@ -3,8 +3,7 @@ man_MANS = \
 	libmdmp.3
 
 EXTRA_DIST = \
-	mdmpinfo.1 \
-	libmdmp.3
+	$(man_MANS)
 
 DISTCLEANFILES = \
 	Makefile \
