@@ -2,7 +2,7 @@ AC_PREREQ([2.71])
 
 AC_INIT(
   [libmdmp],
-  [20260625],
+  [20260816],
   [https://github.com/libyal/libmdmp/issues])
 
 AC_CONFIG_SRCDIR(
